@@ -1,12 +1,10 @@
 class Player {
-    constructor(x, y, w, h, c, xSpeed, ySpeed) {
+    constructor(x, y, w, h, c) {
       this.x = x;
       this.y = y;
       this.w = w;
       this.h = h;
       this.c = c;
-      this.xSpeed = xSpeed;
-      this.ySpeed = ySpeed;
     }
   
     drawRect() {
@@ -16,7 +14,14 @@ class Player {
 
     move() {
         if (dKeyPressed) {
-            var playerLocation = arrayMap[playerLocation];
+            playerLocation ++;
+            this.x += this.w;
+            dKeyPressed = false;
         }
+    }
+
+    draw() {
+      this.x = this.w * (playerLocation - 50 * (Math.floor(playerLocation / 50 )));
+      this.y = this.h * (Math.floor(playerLocation / 50));
     }
 }

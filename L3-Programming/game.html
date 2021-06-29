@@ -48,6 +48,8 @@
         ]
 
         var pixelSize = 20;
+        var pXpos = 0;
+        var pYpos = 0;
 
         const W_KEY = 87;
         const A_KEY = 65;
@@ -60,7 +62,8 @@
         var dKeyPressed = false;
 
         var gameStarting = false;
-        var playerLocation = 150;
+        var playerLocation = 550;
+        var player = new Player(pXpos, pYpos, pixelSize, pixelSize, 'white');
 
         window.onload = function () {
             canvas = document.getElementById('gameCanvas');
@@ -76,8 +79,11 @@
                 arrayMap[playerLocation] = 1;
                 gameStarting = false;
             }
-            colorRect(0, 0, canvas.width, canvas.height, 'green');
+            colorRect(0, 0, canvas.width, canvas.height, 'purple');
             mazeDraw();
+            activePlayerLocation();
+            player.drawRect();
+            player.draw();
             player.move();
         }
 
@@ -86,13 +92,17 @@
       canvasContext.fillRect(x, y, w, h);
         }
 
+        function activePlayerLocation() {
+            arrayMap[playerLocation] = 1;
+        }
+
         function mazeDraw() {
-            for (var i = 0; i < arrayMap.length; i++) {
-                if (arrayMap[i] == 1) {
-                    colorRect(((i - 50 * (Math.floor(i / 50 ))) * pixelSize), (Math.floor(i / 50)) * pixelSize, pixelSize, pixelSize, 'black');
-                } 
+            for (var i = 0; i < arrayMap.length; i++)  {
+                // if (arrayMap[i] == 1) {
+                //     colorRect(((i - 50 * (Math.floor(i / 50 ))) * pixelSize), (Math.floor(i / 50)) * pixelSize, pixelSize, pixelSize, 'white');
+                // } 
                 if (arrayMap[i] == 2) {
-                    colorRect(((i - 50 * (Math.floor(i / 50 ))) * pixelSize), (Math.floor(i / 50)) * pixelSize, pixelSize, pixelSize, 'red');
+                    colorRect(((i - 50 * (Math.floor(i / 50 ))) * pixelSize), (Math.floor(i / 50)) * pixelSize, pixelSize, pixelSize, 'black');
                 }
                 if (arrayMap[i] == 3) {
                     colorRect(((i - 50 * (Math.floor(i / 50 ))) * pixelSize), (Math.floor(i / 50)) * pixelSize, pixelSize, pixelSize, 'yellow');
