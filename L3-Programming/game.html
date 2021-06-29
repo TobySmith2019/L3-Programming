@@ -1,7 +1,7 @@
 <!<!DOCTYPE html>
 
     <head>
-        <title>Game Classes Intro</title>
+        <title>Maze Game</title>
         <script src="player.js"></script>
     </head>
 
@@ -69,7 +69,7 @@
             canvas = document.getElementById('gameCanvas');
             canvasContext = canvas.getContext('2d');
 
-              document.addEventListener('keydown', keyPressed);
+            document.addEventListener('keydown', keyPressed);
 
             setInterval(mainloop, 1000 / 50);
         }
@@ -85,6 +85,7 @@
             player.drawRect();
             player.draw();
             player.move();
+            console.log(arrayMap[551]);
         }
 
         function colorRect(x, y, w, h, c, z) {
