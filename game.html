@@ -3,6 +3,7 @@
     <head>
         <title>Maze Game</title>
         <script src="player.js"></script>
+        <script src="enemy.js"></script>
     </head>
 
     <body>
@@ -40,8 +41,8 @@
             2, 0, 2, 0, 2, 0, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 0, 2, 0, 2, 2, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0, 2, 0, 2, 
             2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 2, 0, 2, 0, 0, 2, 2, 0, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 0, 2, 
             2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 0, 2, 0, 2, 2, 0, 2, 0, 2, 0, 2, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2, 
-            2, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 2, 2, 2, 0, 2, 0, 2, 0, 0, 2, 0, 2, 2, 2, 0, 2, 0, 0, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 0, 2, 2, 2, 0, 2, 
-            2, 0, 2, 0, 2, 0, 0, 0, 2, 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2, 2, 0, 0, 0, 0, 0, 2, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2, 2, 2, 0, 2, 
+            2, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 2, 2, 2, 0, 2, 0, 2, 0, 0, 2, 0, 2, 2, 2, 0, 2, 0, 0, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 0, 2, 0, 2, 0, 2, 
+            2, 0, 2, 0, 2, 0, 0, 0, 2, 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2, 2, 0, 0, 0, 0, 0, 2, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2, 0, 2, 0, 2, 
             2, 0, 2, 2, 2, 2, 2, 0, 2, 0, 0, 2, 0, 2, 2, 2, 2, 2, 0, 2, 0, 0, 2, 0, 2, 2, 2, 0, 2, 0, 0, 2, 2, 2, 0, 2, 2, 2, 0, 2, 0, 2, 2, 2, 0, 2, 2, 2, 0, 2, 
             2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 
             2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
@@ -50,6 +51,12 @@
         var pixelSize = 20;
         var pXpos = 0;
         var pYpos = 0;
+
+        var enemy1xPos = 800;
+        var enemy1yPos = 20;
+        var enemySpeed = 1;
+        var enemy1xMove = 0;
+        var enemy1yMove = 17;
 
         const W_KEY = 87;
         const A_KEY = 65;
@@ -61,15 +68,23 @@
         var sKeyPressed = false;
         var dKeyPressed = false;
 
+        var wOneClick = false;
+        var aOneClick = false;
+        var sOneClick = false;
+        var dOneClick = false;
+
+        var distanceMoved = 0;
         var gameStarting = false;
         var playerLocation = 550;
         var player = new Player(pXpos, pYpos, pixelSize, pixelSize, 'white');
+        var enemy1 = new Enemy(enemy1xPos, enemy1yPos, pixelSize, pixelSize, 'red', enemySpeed, enemy1xMove, enemy1yMove);
 
         window.onload = function () {
             canvas = document.getElementById('gameCanvas');
             canvasContext = canvas.getContext('2d');
 
             document.addEventListener('keydown', keyPressed);
+            document.addEventListener('keyup', keyReleased);
 
             setInterval(mainloop, 1000 / 50);
         }
@@ -85,7 +100,8 @@
             player.drawRect();
             player.draw();
             player.move();
-            console.log(arrayMap[551]);
+            enemy1.drawRect();
+            enemy1.move();
         }
 
         function colorRect(x, y, w, h, c, z) {
@@ -115,17 +131,36 @@
     }
     
     function keyPressed(evt) {
-        if (evt.keyCode == W_KEY) {
+        if (evt.keyCode == W_KEY && wOneClick == false) {
             wKeyPressed = true;
+            wOneClick = true;
+        }
+        if (evt.keyCode == A_KEY && aOneClick == false) {
+            aKeyPressed = true;
+            aOneClick = true;
+        }
+        if (evt.keyCode == S_KEY && sOneClick == false) {
+            sKeyPressed = true;
+            sOneClick = true;
+        }
+        if (evt.keyCode == D_KEY && dOneClick == false) {
+            dKeyPressed = true;
+            dOneClick = true;
+        }
+    }
+
+    function keyReleased(evt) {
+        if (evt.keyCode == W_KEY) {
+            wOneClick = false;
         }
         if (evt.keyCode == A_KEY) {
-            aKeyPressed = true;
+            aOneClick = false;
         }
         if (evt.keyCode == S_KEY) {
-            sKeyPressed = true;
+            sOneClick = false;
         }
         if (evt.keyCode == D_KEY) {
-            dKeyPressed = true;
+            dOneClick = false;
         }
     }
             
