@@ -13,32 +13,40 @@ class Player {
   }
 
   move() {
-    if (wKeyPressed && arrayMap[playerLocation - 50] == 0) {
-      arrayMap[playerLocation] = 0;
+    if (wKeyPressed && arrayMap[playerLocation - 50] == 0 || wKeyPressed && arrayMap[playerLocation - 50] == 5) {
+      lastKeyPressed = 1;
+      arrayMap[playerLocation] = steppedOn;
+      steppedOn = arrayMap[playerLocation - 50];
       aKeyPressed = false;
       sKeyPressed = false;
       dKeyPressed = false;
       playerLocation -= 50;
       wKeyPressed = false;
     }
-    if (aKeyPressed && arrayMap[playerLocation - 1] == 0) {
-      arrayMap[playerLocation] = 0;
+    if (aKeyPressed && arrayMap[playerLocation - 1] == 0 || aKeyPressed && arrayMap[playerLocation - 1] == 5) {
+      lastKeyPressed = 2;
+      arrayMap[playerLocation] = steppedOn;
+      steppedOn = arrayMap[playerLocation - 1];
       wKeyPressed = false;
       sKeyPressed = false;
       dKeyPressed = false;
       playerLocation--;
       aKeyPressed = false;
     }
-    if (sKeyPressed && arrayMap[playerLocation + 50] == 0) {
-      arrayMap[playerLocation] = 0;
+    if (sKeyPressed && arrayMap[playerLocation + 50] == 0 || sKeyPressed && arrayMap[playerLocation + 50] == 5) {
+      lastKeyPressed = 3;
+      arrayMap[playerLocation] = steppedOn;
+      steppedOn = arrayMap[playerLocation + 50];
       wKeyPressed = false;
       aKeyPressed = false;
       dKeyPressed = false;
       playerLocation += 50;
       sKeyPressed = false;
     }
-    if (dKeyPressed && arrayMap[playerLocation + 1] == 0) {
-      arrayMap[playerLocation] = 0;
+    if (dKeyPressed && arrayMap[playerLocation + 1] == 0 || dKeyPressed && arrayMap[playerLocation + 1] == 5) {
+      lastKeyPressed = 4;
+      arrayMap[playerLocation] = steppedOn;
+      steppedOn = arrayMap[playerLocation + 1];
       wKeyPressed = false;
       aKeyPressed = false;
       sKeyPressed = false;
@@ -50,5 +58,10 @@ class Player {
   draw() {
     this.x = this.w * (playerLocation - 50 * (Math.floor(playerLocation / 50)));
     this.y = this.h * (Math.floor(playerLocation / 50));
+  }
+
+  dead() {
+    steppedOn = 3;
+    playerLocation = 550;
   }
 }

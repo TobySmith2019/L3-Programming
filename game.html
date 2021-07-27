@@ -19,14 +19,16 @@
         // 2 = MazeWall
         // 3 = StartPosition
         // 4 = Placeholder
+        // 5 = Trap Trigger
+        // 6 = Dummy Wall
 
         var arrayMap = [
             2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 
             2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 4, 4, 4, 4, 4, 4, 2, 
             2, 0, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 0, 2, 0, 2, 2, 0, 2, 2, 0, 2, 0, 2, 0, 2, 2, 2, 0, 2, 0, 4, 4, 4, 4, 4, 4, 2, 
             2, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 2, 0, 0, 2, 2, 2, 0, 2, 0, 0, 2, 0, 0, 2, 0, 4, 4, 4, 4, 4, 4, 2, 
-            2, 0, 2, 0, 2, 2, 2, 0, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 0, 2, 0, 2, 2, 2, 0, 2, 2, 0, 0, 0, 0, 0, 2, 2, 0, 2, 2, 0, 2, 0, 4, 4, 4, 4, 4, 4, 2, 
-            2, 0, 2, 0, 2, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 2, 0, 2, 0, 0, 0, 0, 2, 2, 2, 0, 0, 2, 0, 0, 0, 0, 2, 0, 4, 4, 4, 4, 4, 4, 2, 
+            2, 0, 2, 0, 2, 2, 2, 0, 2, 2, 2, 2, 2, 5, 2, 2, 2, 2, 2, 2, 2, 0, 2, 0, 2, 2, 2, 0, 2, 2, 0, 0, 0, 0, 0, 2, 2, 0, 2, 2, 0, 2, 0, 4, 4, 4, 4, 4, 4, 2, 
+            2, 0, 2, 0, 2, 0, 2, 0, 0, 0, 0, 0, 2, 6, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 2, 0, 2, 0, 0, 0, 0, 2, 2, 2, 0, 0, 2, 0, 0, 0, 0, 2, 0, 4, 4, 4, 4, 4, 4, 2, 
             2, 0, 0, 0, 0, 0, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 0, 2, 0, 2, 2, 2, 2, 2, 2, 0, 2, 0, 2, 2, 0, 0, 0, 2, 2, 0, 2, 2, 2, 2, 0, 2, 0, 4, 4, 4, 4, 4, 4, 2, 
             2, 2, 2, 0, 2, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 
             2, 0, 0, 0, 2, 0, 2, 0, 2, 2, 2, 2, 0, 2, 0, 2, 0, 2, 0, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 0, 2, 0, 2, 2, 0, 2, 0, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 0, 2, 
@@ -51,12 +53,33 @@
         var pixelSize = 20;
         var pXpos = 0;
         var pYpos = 0;
+        
+        var enemySpeed = 2;
 
         var enemy1xPos = 800;
         var enemy1yPos = 20;
-        var enemySpeed = 1;
         var enemy1xMove = 0;
-        var enemy1yMove = 17;
+        var enemy1yMove = 15;  
+        
+        var enemy2xPos = 560;
+        var enemy2yPos = 380;
+        var enemy2xMove = 13;
+        var enemy2yMove = 0;
+
+        var enemy3xPos = 180;
+        var enemy3yPos = 320;
+        var enemy3xMove = 9;
+        var enemy3yMove = 0;
+
+        var enemy4xPos = 180;
+        var enemy4yPos = 60;
+        var enemy4xMove = 9;
+        var enemy4yMove = 0;
+
+        var enemy5xPos = 420;
+        var enemy5yPos = 280;
+        var enemy5xMove = 0;
+        var enemy5yMove = 7;
 
         const W_KEY = 87;
         const A_KEY = 65;
@@ -73,11 +96,22 @@
         var sOneClick = false;
         var dOneClick = false;
 
-        var distanceMoved = 0;
+        var invincibilityLocation = null;
+
+        var lastKeyPressed = null;
+        var dummyWallLocation = null;
+        var enemyReversed = false;
+        var displacement = 0;
         var gameStarting = false;
         var playerLocation = 550;
+        var steppedOn = 3;
         var player = new Player(pXpos, pYpos, pixelSize, pixelSize, 'white');
-        var enemy1 = new Enemy(enemy1xPos, enemy1yPos, pixelSize, pixelSize, 'red', enemySpeed, enemy1xMove, enemy1yMove);
+        var enemyCount = 4;
+        var enemy1 = new Enemy(enemy1xPos, enemy1yPos, pixelSize, pixelSize, 'red', enemySpeed, enemy1xMove, enemy1yMove, displacement, enemyReversed);
+        var enemy2 = new Enemy(enemy2xPos, enemy2yPos, pixelSize, pixelSize, 'red', enemySpeed, enemy2xMove, enemy2yMove, displacement, enemyReversed);
+        var enemy3 = new Enemy(enemy3xPos, enemy3yPos, pixelSize, pixelSize, 'red', enemySpeed, enemy3xMove, enemy3yMove, displacement, enemyReversed);
+        var enemy4 = new Enemy(enemy4xPos, enemy4yPos, pixelSize, pixelSize, 'red', enemySpeed, enemy4xMove, enemy4yMove, displacement, enemyReversed);
+        var enemy5 = new Enemy(enemy5xPos, enemy5yPos, pixelSize, pixelSize, 'red', enemySpeed, enemy5xMove, enemy5yMove, displacement, enemyReversed);
 
         window.onload = function () {
             canvas = document.getElementById('gameCanvas');
@@ -102,6 +136,16 @@
             player.move();
             enemy1.drawRect();
             enemy1.move();
+            enemy2.drawRect();
+            enemy2.move();
+            enemy3.drawRect();
+            enemy3.move();
+            enemy4.drawRect();
+            enemy4.move();
+            enemy5.drawRect();
+            enemy5.move();
+            trapWall();
+            powerUps();
         }
 
         function colorRect(x, y, w, h, c, z) {
@@ -111,6 +155,41 @@
 
         function activePlayerLocation() {
             arrayMap[playerLocation] = 1;
+        }
+
+        function powerUps() {
+            if (invincibilityLocation == null) {
+            invincibilityLocation = Math.floor(Math.random() * 1249);
+            if (arrayMap[invincibilityLocation] != 0) {
+            invincibilityLocation = Math.floor(Math.random() * 1249);
+        }
+        }
+        
+        arrayMap[invincibilityLocation] = 3;
+    }
+        function trapWall() {
+            if (arrayMap[playerLocation] == 5) {
+                if (arrayMap[playerLocation + 50] == 6) {
+                arrayMap[playerLocation + 50] = 2;
+                dummyWallLocation = playerLocation + 50;
+            }
+            if (arrayMap[playerLocation - 50] == 6) {
+                arrayMap[playerLocation - 50] = 2;
+                dummyWallLocation = playerLocation - 50;
+            }
+            if (arrayMap[playerLocation + 1] == 6) {
+                arrayMap[playerLocation + 1] = 2;
+                dummyWallLocation = playerLocation + 1;
+            }
+            if (arrayMap[playerLocation - 1] == 6) {
+                arrayMap[playerLocation - 1] = 2;
+                dummyWallLocation = playerLocation - 1;
+            }
+        }
+        
+            if (steppedOn != 5) {
+                arrayMap[dummyWallLocation] = 6;
+            }
         }
 
         function mazeDraw() {
