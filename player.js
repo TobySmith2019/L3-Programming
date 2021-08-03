@@ -13,7 +13,7 @@ class Player {
   }
 
   move() {
-    if (wKeyPressed && arrayMap[playerLocation - 50] == 0 || wKeyPressed && arrayMap[playerLocation - 50] == 5) {
+    if (wKeyPressed && arrayMap[playerLocation - 50] != 2) {
       lastKeyPressed = 1;
       arrayMap[playerLocation] = steppedOn;
       steppedOn = arrayMap[playerLocation - 50];
@@ -23,7 +23,7 @@ class Player {
       playerLocation -= 50;
       wKeyPressed = false;
     }
-    if (aKeyPressed && arrayMap[playerLocation - 1] == 0 || aKeyPressed && arrayMap[playerLocation - 1] == 5) {
+    if (aKeyPressed && arrayMap[playerLocation - 1] != 2) {
       lastKeyPressed = 2;
       arrayMap[playerLocation] = steppedOn;
       steppedOn = arrayMap[playerLocation - 1];
@@ -33,7 +33,7 @@ class Player {
       playerLocation--;
       aKeyPressed = false;
     }
-    if (sKeyPressed && arrayMap[playerLocation + 50] == 0 || sKeyPressed && arrayMap[playerLocation + 50] == 5) {
+    if (sKeyPressed && arrayMap[playerLocation + 50] != 2) {
       lastKeyPressed = 3;
       arrayMap[playerLocation] = steppedOn;
       steppedOn = arrayMap[playerLocation + 50];
@@ -43,7 +43,7 @@ class Player {
       playerLocation += 50;
       sKeyPressed = false;
     }
-    if (dKeyPressed && arrayMap[playerLocation + 1] == 0 || dKeyPressed && arrayMap[playerLocation + 1] == 5) {
+    if (dKeyPressed && arrayMap[playerLocation + 1] != 2) {
       lastKeyPressed = 4;
       arrayMap[playerLocation] = steppedOn;
       steppedOn = arrayMap[playerLocation + 1];
@@ -55,6 +55,21 @@ class Player {
     }
   }
 
+  power() {
+    if (invincibility) {
+      this.c = 'pink';
+    } else {
+      this.c = 'lime';
+  }
+    if (steppedOn == 7) {
+      invincibility = true;
+      steppedOn = 0;
+      setTimeout(function() {
+        invincibility = false;
+      }, 10000);
+    }
+  }
+
   draw() {
     this.x = this.w * (playerLocation - 50 * (Math.floor(playerLocation / 50)));
     this.y = this.h * (Math.floor(playerLocation / 50));
@@ -63,5 +78,6 @@ class Player {
   dead() {
     steppedOn = 3;
     playerLocation = 550;
+    this.c = 'lime';
   }
 }

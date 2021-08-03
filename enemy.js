@@ -69,7 +69,7 @@ class Enemy {
   }
 
   collision() {
-    if (this.x + this.w > player.x && this.x < player.x + player.w && this.y + this.h > player.y && this.y < player.y + player.h) {
+    if (this.x + this.w > player.x && this.x < player.x + player.w && this.y + this.h > player.y && this.y < player.y + player.h && invincibility == false) {
       player.dead();
     }
   }

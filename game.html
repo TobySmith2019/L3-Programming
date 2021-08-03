@@ -21,46 +21,46 @@
         // 4 = Placeholder
         // 5 = Trap Trigger
         // 6 = Dummy Wall
+        // 7 = Power Up
 
         var arrayMap = [
-            2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 
-            2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 4, 4, 4, 4, 4, 4, 2, 
-            2, 0, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 0, 2, 0, 2, 2, 0, 2, 2, 0, 2, 0, 2, 0, 2, 2, 2, 0, 2, 0, 4, 4, 4, 4, 4, 4, 2, 
-            2, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 2, 0, 0, 2, 2, 2, 0, 2, 0, 0, 2, 0, 0, 2, 0, 4, 4, 4, 4, 4, 4, 2, 
-            2, 0, 2, 0, 2, 2, 2, 0, 2, 2, 2, 2, 2, 5, 2, 2, 2, 2, 2, 2, 2, 0, 2, 0, 2, 2, 2, 0, 2, 2, 0, 0, 0, 0, 0, 2, 2, 0, 2, 2, 0, 2, 0, 4, 4, 4, 4, 4, 4, 2, 
-            2, 0, 2, 0, 2, 0, 2, 0, 0, 0, 0, 0, 2, 6, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 2, 0, 2, 0, 0, 0, 0, 2, 2, 2, 0, 0, 2, 0, 0, 0, 0, 2, 0, 4, 4, 4, 4, 4, 4, 2, 
-            2, 0, 0, 0, 0, 0, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 0, 2, 0, 2, 2, 2, 2, 2, 2, 0, 2, 0, 2, 2, 0, 0, 0, 2, 2, 0, 2, 2, 2, 2, 0, 2, 0, 4, 4, 4, 4, 4, 4, 2, 
-            2, 2, 2, 0, 2, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 
-            2, 0, 0, 0, 2, 0, 2, 0, 2, 2, 2, 2, 0, 2, 0, 2, 0, 2, 0, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 0, 2, 0, 2, 2, 0, 2, 0, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 0, 2, 
-            2, 0, 2, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 2, 0, 2, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 2, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 
-            2, 0, 2, 0, 2, 0, 2, 2, 2, 0, 2, 0, 2, 2, 2, 2, 0, 2, 0, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 0, 2, 0, 2, 0, 2, 0, 2, 2, 2, 2, 2, 2, 2, 
-            3, 0, 2, 0, 2, 0, 0, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 2, 0, 0, 2, 0, 2, 0, 2, 0, 2, 2, 0, 0, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 0, 2, 0, 2, 0, 0, 0, 0, 0, 3, 
-            2, 0, 2, 2, 2, 2, 2, 0, 2, 0, 2, 2, 2, 0, 2, 0, 2, 2, 2, 0, 2, 0, 0, 0, 0, 0, 0, 2, 0, 2, 2, 0, 2, 0, 2, 0, 2, 2, 0, 2, 0, 2, 0, 2, 0, 2, 2, 2, 2, 2, 
-            2, 0, 0, 0, 0, 0, 2, 0, 2, 0, 2, 0, 0, 0, 2, 0, 2, 0, 2, 0, 2, 2, 2, 2, 0, 2, 0, 2, 0, 2, 0, 0, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 0, 2, 0, 0, 0, 0, 0, 2, 
-            2, 0, 2, 2, 2, 0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 2, 0, 2, 0, 2, 0, 2, 2, 0, 2, 0, 2, 0, 2, 2, 0, 2, 0, 2, 2, 2, 2, 2, 0, 2, 
-            2, 0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 2, 2, 2, 2, 2, 2, 0, 2, 0, 2, 2, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 2, 0, 0, 2, 0, 2, 0, 2, 0, 0, 0, 2, 0, 2, 
-            2, 0, 2, 0, 2, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 0, 2, 2, 2, 0, 2, 0, 2, 0, 2, 
-            2, 0, 2, 0, 2, 0, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 0, 2, 0, 2, 2, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0, 2, 0, 2, 
-            2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 2, 0, 2, 0, 0, 2, 2, 0, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 0, 2, 
-            2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 0, 2, 0, 2, 2, 0, 2, 0, 2, 0, 2, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2, 
-            2, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 2, 2, 2, 0, 2, 0, 2, 0, 0, 2, 0, 2, 2, 2, 0, 2, 0, 0, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 0, 2, 0, 2, 0, 2, 
-            2, 0, 2, 0, 2, 0, 0, 0, 2, 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2, 2, 0, 0, 0, 0, 0, 2, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2, 0, 2, 0, 2, 
-            2, 0, 2, 2, 2, 2, 2, 0, 2, 0, 0, 2, 0, 2, 2, 2, 2, 2, 0, 2, 0, 0, 2, 0, 2, 2, 2, 0, 2, 0, 0, 2, 2, 2, 0, 2, 2, 2, 0, 2, 0, 2, 2, 2, 0, 2, 2, 2, 0, 2, 
-            2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 
+            2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+            2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 4, 4, 4, 4, 4, 4, 2,
+            2, 0, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 0, 2, 0, 2, 2, 0, 2, 2, 0, 2, 0, 2, 0, 2, 2, 2, 0, 2, 0, 4, 4, 4, 4, 4, 4, 2,
+            2, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 2, 0, 0, 2, 2, 2, 0, 2, 0, 0, 2, 0, 0, 2, 0, 4, 4, 4, 4, 4, 4, 2,
+            2, 0, 2, 0, 2, 2, 2, 0, 2, 2, 2, 2, 2, 5, 2, 2, 2, 2, 2, 2, 2, 0, 2, 0, 2, 2, 2, 0, 2, 2, 0, 0, 0, 0, 0, 2, 2, 0, 2, 2, 0, 2, 0, 4, 4, 4, 4, 4, 4, 2,
+            2, 0, 2, 0, 2, 0, 2, 0, 0, 0, 0, 0, 2, 6, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 2, 0, 2, 0, 0, 0, 0, 2, 2, 2, 0, 0, 2, 0, 0, 0, 0, 2, 0, 4, 4, 4, 4, 4, 4, 2,
+            2, 0, 0, 0, 0, 0, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 0, 2, 0, 2, 2, 2, 2, 2, 2, 0, 2, 0, 2, 2, 0, 0, 0, 2, 2, 0, 2, 2, 2, 2, 0, 2, 0, 4, 4, 4, 4, 4, 4, 2,
+            2, 2, 2, 0, 2, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2,
+            2, 0, 0, 0, 2, 0, 2, 0, 2, 2, 2, 2, 0, 2, 0, 2, 0, 2, 0, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 0, 2, 0, 2, 2, 0, 2, 0, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 0, 2,
+            2, 0, 2, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 2, 0, 2, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 2, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2,
+            2, 0, 2, 0, 2, 0, 2, 2, 2, 0, 2, 0, 2, 2, 2, 2, 0, 2, 0, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 0, 2, 0, 2, 0, 2, 0, 2, 2, 2, 2, 2, 2, 2,
+            3, 7, 2, 0, 2, 0, 0, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 2, 0, 0, 2, 0, 2, 0, 2, 0, 2, 2, 0, 0, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 0, 2, 0, 2, 0, 0, 0, 0, 0, 3,
+            2, 0, 2, 2, 2, 2, 2, 0, 2, 0, 2, 2, 2, 0, 2, 0, 2, 2, 2, 0, 2, 0, 0, 0, 0, 0, 0, 2, 0, 2, 2, 0, 2, 0, 2, 0, 2, 2, 0, 2, 0, 2, 0, 2, 0, 2, 2, 2, 2, 2,
+            2, 0, 0, 0, 0, 0, 2, 0, 2, 0, 2, 0, 0, 0, 2, 0, 2, 0, 2, 0, 2, 2, 2, 2, 0, 2, 0, 2, 0, 2, 0, 0, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 0, 2, 0, 0, 0, 0, 0, 2,
+            2, 0, 2, 2, 2, 0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 2, 0, 2, 0, 2, 0, 2, 2, 0, 2, 0, 2, 0, 2, 2, 0, 2, 0, 2, 2, 2, 2, 2, 0, 2,
+            2, 0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 2, 2, 2, 2, 2, 2, 0, 2, 0, 2, 2, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 2, 0, 0, 2, 0, 2, 0, 2, 0, 0, 0, 2, 0, 2,
+            2, 0, 2, 0, 2, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 0, 2, 2, 2, 0, 2, 0, 2, 0, 2,
+            2, 0, 2, 0, 2, 0, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 0, 2, 0, 2, 2, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0, 2, 0, 2,
+            2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 2, 0, 2, 0, 0, 2, 2, 0, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 0, 2,
+            2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 0, 2, 0, 2, 2, 0, 2, 0, 2, 0, 2, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2,
+            2, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 2, 2, 2, 0, 2, 0, 2, 0, 0, 2, 0, 2, 2, 2, 0, 2, 0, 0, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 0, 2, 0, 2, 0, 2,
+            2, 0, 2, 0, 2, 0, 0, 0, 2, 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2, 2, 0, 0, 0, 0, 0, 2, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2, 0, 2, 0, 2,
+            2, 0, 2, 2, 2, 2, 2, 0, 2, 0, 0, 2, 0, 2, 2, 2, 2, 2, 0, 2, 0, 0, 2, 0, 2, 2, 2, 0, 2, 0, 0, 2, 2, 2, 0, 2, 2, 2, 0, 2, 0, 2, 2, 2, 0, 2, 2, 2, 0, 2,
+            2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2,
             2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
         ]
 
         var pixelSize = 20;
         var pXpos = 0;
         var pYpos = 0;
-        
         var enemySpeed = 2;
 
         var enemy1xPos = 800;
         var enemy1yPos = 20;
         var enemy1xMove = 0;
-        var enemy1yMove = 15;  
-        
+        var enemy1yMove = 15;
+
         var enemy2xPos = 560;
         var enemy2yPos = 380;
         var enemy2xMove = 13;
@@ -96,7 +96,9 @@
         var sOneClick = false;
         var dOneClick = false;
 
-        var invincibilityLocation = null;
+        var invincibilityLocation = 550;
+        var invincibility = false;
+        var powerUpPlaced = false;
 
         var lastKeyPressed = null;
         var dummyWallLocation = null;
@@ -105,13 +107,18 @@
         var gameStarting = false;
         var playerLocation = 550;
         var steppedOn = 3;
-        var player = new Player(pXpos, pYpos, pixelSize, pixelSize, 'white');
+        var player = new Player(pXpos, pYpos, pixelSize, pixelSize, 'lime');
         var enemyCount = 4;
-        var enemy1 = new Enemy(enemy1xPos, enemy1yPos, pixelSize, pixelSize, 'red', enemySpeed, enemy1xMove, enemy1yMove, displacement, enemyReversed);
-        var enemy2 = new Enemy(enemy2xPos, enemy2yPos, pixelSize, pixelSize, 'red', enemySpeed, enemy2xMove, enemy2yMove, displacement, enemyReversed);
-        var enemy3 = new Enemy(enemy3xPos, enemy3yPos, pixelSize, pixelSize, 'red', enemySpeed, enemy3xMove, enemy3yMove, displacement, enemyReversed);
-        var enemy4 = new Enemy(enemy4xPos, enemy4yPos, pixelSize, pixelSize, 'red', enemySpeed, enemy4xMove, enemy4yMove, displacement, enemyReversed);
-        var enemy5 = new Enemy(enemy5xPos, enemy5yPos, pixelSize, pixelSize, 'red', enemySpeed, enemy5xMove, enemy5yMove, displacement, enemyReversed);
+        var enemy1 = new Enemy(enemy1xPos, enemy1yPos, pixelSize, pixelSize, 'red', enemySpeed, enemy1xMove,
+            enemy1yMove, displacement, enemyReversed);
+        var enemy2 = new Enemy(enemy2xPos, enemy2yPos, pixelSize, pixelSize, 'red', enemySpeed, enemy2xMove,
+            enemy2yMove, displacement, enemyReversed);
+        var enemy3 = new Enemy(enemy3xPos, enemy3yPos, pixelSize, pixelSize, 'red', enemySpeed, enemy3xMove,
+            enemy3yMove, displacement, enemyReversed);
+        var enemy4 = new Enemy(enemy4xPos, enemy4yPos, pixelSize, pixelSize, 'red', enemySpeed, enemy4xMove,
+            enemy4yMove, displacement, enemyReversed);
+        var enemy5 = new Enemy(enemy5xPos, enemy5yPos, pixelSize, pixelSize, 'red', enemySpeed, enemy5xMove,
+            enemy5yMove, displacement, enemyReversed);
 
         window.onload = function () {
             canvas = document.getElementById('gameCanvas');
@@ -128,12 +135,13 @@
                 arrayMap[playerLocation] = 1;
                 gameStarting = false;
             }
-            colorRect(0, 0, canvas.width, canvas.height, 'purple');
+            colorRect(0, 0, canvas.width, canvas.height, 'white');
             mazeDraw();
             activePlayerLocation();
             player.drawRect();
             player.draw();
             player.move();
+            player.power();
             enemy1.drawRect();
             enemy1.move();
             enemy2.drawRect();
@@ -146,11 +154,13 @@
             enemy5.move();
             trapWall();
             powerUps();
+            // console.log(steppedOn);
+            // console.log(invincibility);
         }
 
         function colorRect(x, y, w, h, c, z) {
-      canvasContext.fillStyle = c;
-      canvasContext.fillRect(x, y, w, h);
+            canvasContext.fillStyle = c;
+            canvasContext.fillRect(x, y, w, h);
         }
 
         function activePlayerLocation() {
@@ -158,89 +168,98 @@
         }
 
         function powerUps() {
-            if (invincibilityLocation == null) {
-            invincibilityLocation = Math.floor(Math.random() * 1249);
-            if (arrayMap[invincibilityLocation] != 0) {
-            invincibilityLocation = Math.floor(Math.random() * 1249);
+            if (arrayMap[invincibilityLocation] != 0 && powerUpPlaced == false) {
+                invincibilityLocation = Math.floor(Math.random() * 1249);
+            
+            if (arrayMap[invincibilityLocation] == 0) {
+                arrayMap[invincibilityLocation] = 7;
+                powerUpPlaced = true;
+            }}
+        if (invincibility) {
+            // canvasContext.fillStyle = "500px sans-serif";
+            canvasContext.fillText("Invincibility", 900, 40, 6 * pixelSize);
         }
         }
-        
-        arrayMap[invincibilityLocation] = 3;
-    }
         function trapWall() {
             if (arrayMap[playerLocation] == 5) {
                 if (arrayMap[playerLocation + 50] == 6) {
-                arrayMap[playerLocation + 50] = 2;
-                dummyWallLocation = playerLocation + 50;
+                    arrayMap[playerLocation + 50] = 2;
+                    dummyWallLocation = playerLocation + 50;
+                }
+                if (arrayMap[playerLocation - 50] == 6) {
+                    arrayMap[playerLocation - 50] = 2;
+                    dummyWallLocation = playerLocation - 50;
+                }
+                if (arrayMap[playerLocation + 1] == 6) {
+                    arrayMap[playerLocation + 1] = 2;
+                    dummyWallLocation = playerLocation + 1;
+                }
+                if (arrayMap[playerLocation - 1] == 6) {
+                    arrayMap[playerLocation - 1] = 2;
+                    dummyWallLocation = playerLocation - 1;
+                }
             }
-            if (arrayMap[playerLocation - 50] == 6) {
-                arrayMap[playerLocation - 50] = 2;
-                dummyWallLocation = playerLocation - 50;
-            }
-            if (arrayMap[playerLocation + 1] == 6) {
-                arrayMap[playerLocation + 1] = 2;
-                dummyWallLocation = playerLocation + 1;
-            }
-            if (arrayMap[playerLocation - 1] == 6) {
-                arrayMap[playerLocation - 1] = 2;
-                dummyWallLocation = playerLocation - 1;
-            }
-        }
-        
+
             if (steppedOn != 5) {
                 arrayMap[dummyWallLocation] = 6;
             }
         }
 
         function mazeDraw() {
-            for (var i = 0; i < arrayMap.length; i++)  {
+            for (var i = 0; i < arrayMap.length; i++) {
                 // if (arrayMap[i] == 1) {
                 //     colorRect(((i - 50 * (Math.floor(i / 50 ))) * pixelSize), (Math.floor(i / 50)) * pixelSize, pixelSize, pixelSize, 'white');
                 // } 
                 if (arrayMap[i] == 2) {
-                    colorRect(((i - 50 * (Math.floor(i / 50 ))) * pixelSize), (Math.floor(i / 50)) * pixelSize, pixelSize, pixelSize, 'black');
+                    colorRect(((i - 50 * (Math.floor(i / 50))) * pixelSize), (Math.floor(i / 50)) * pixelSize,
+                        pixelSize, pixelSize, 'black');
                 }
                 if (arrayMap[i] == 3) {
-                    colorRect(((i - 50 * (Math.floor(i / 50 ))) * pixelSize), (Math.floor(i / 50)) * pixelSize, pixelSize, pixelSize, 'yellow');
-                } 
+                    colorRect(((i - 50 * (Math.floor(i / 50))) * pixelSize), (Math.floor(i / 50)) * pixelSize,
+                        pixelSize, pixelSize, 'yellow');
+                }
                 if (arrayMap[i] == 4) {
-                    colorRect(((i - 50 * (Math.floor(i / 50 ))) * pixelSize), (Math.floor(i / 50)) * pixelSize, pixelSize, pixelSize, 'blue');
-                } 
+                    colorRect(((i - 50 * (Math.floor(i / 50))) * pixelSize), (Math.floor(i / 50)) * pixelSize,
+                        pixelSize, pixelSize, 'blue');
+                }
+                if (arrayMap[i] == 7) {
+                    colorRect(((i - 50 * (Math.floor(i / 50))) * pixelSize), (Math.floor(i / 50)) * pixelSize,
+                        pixelSize, pixelSize, 'orange');
+                }
             }
-    }
-    
-    function keyPressed(evt) {
-        if (evt.keyCode == W_KEY && wOneClick == false) {
-            wKeyPressed = true;
-            wOneClick = true;
         }
-        if (evt.keyCode == A_KEY && aOneClick == false) {
-            aKeyPressed = true;
-            aOneClick = true;
-        }
-        if (evt.keyCode == S_KEY && sOneClick == false) {
-            sKeyPressed = true;
-            sOneClick = true;
-        }
-        if (evt.keyCode == D_KEY && dOneClick == false) {
-            dKeyPressed = true;
-            dOneClick = true;
-        }
-    }
 
-    function keyReleased(evt) {
-        if (evt.keyCode == W_KEY) {
-            wOneClick = false;
+        function keyPressed(evt) {
+            if (evt.keyCode == W_KEY && wOneClick == false) {
+                wKeyPressed = true;
+                wOneClick = true;
+            }
+            if (evt.keyCode == A_KEY && aOneClick == false) {
+                aKeyPressed = true;
+                aOneClick = true;
+            }
+            if (evt.keyCode == S_KEY && sOneClick == false) {
+                sKeyPressed = true;
+                sOneClick = true;
+            }
+            if (evt.keyCode == D_KEY && dOneClick == false) {
+                dKeyPressed = true;
+                dOneClick = true;
+            }
         }
-        if (evt.keyCode == A_KEY) {
-            aOneClick = false;
+
+        function keyReleased(evt) {
+            if (evt.keyCode == W_KEY) {
+                wOneClick = false;
+            }
+            if (evt.keyCode == A_KEY) {
+                aOneClick = false;
+            }
+            if (evt.keyCode == S_KEY) {
+                sOneClick = false;
+            }
+            if (evt.keyCode == D_KEY) {
+                dOneClick = false;
+            }
         }
-        if (evt.keyCode == S_KEY) {
-            sOneClick = false;
-        }
-        if (evt.keyCode == D_KEY) {
-            dOneClick = false;
-        }
-    }
-            
     </script>
