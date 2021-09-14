@@ -5,19 +5,28 @@ class Enemy {
     this.w = w;
     this.h = h;
     this.c = c;
-    this.v = v;
+    this.v =v;
     this.xMove = xMove;
     this.yMove = yMove;
     this.d = d;
     this.ed = ed;
   }
 
-  drawRect() {
+  drawRect() { 
     canvasContext.fillStyle = this.c;
     canvasContext.fillRect(this.x, this.y, this.w, this.h);
   }
   // ed = enemydirection
   move() {
+    if (easyClicked) {
+      this.v = 1;
+    }
+    if (mediumClicked) {
+      this.v = 2;
+    }
+    if (hardClicked) {
+      this.v = 4;
+    }
     this.collision();
     // console.log(this.d);
     if (this.yMove > 0) {

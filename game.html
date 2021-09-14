@@ -1,7 +1,7 @@
 <!<!DOCTYPE html>
 
     <head>
-        <title>Maze Game</title>
+        <title>Bollo</title>
         <script src="player.js"></script>
         <script src="enemy.js"></script>
     </head>
@@ -25,12 +25,12 @@
 
         var arrayMap = [
             2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
-            2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 4, 4, 4, 4, 4, 4, 2,
-            2, 0, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 0, 2, 0, 2, 2, 0, 2, 2, 0, 2, 0, 2, 0, 2, 2, 2, 0, 2, 0, 4, 4, 4, 4, 4, 4, 2,
-            2, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 2, 0, 0, 2, 2, 2, 0, 2, 0, 0, 2, 0, 0, 2, 0, 4, 4, 4, 4, 4, 4, 2,
-            2, 0, 2, 0, 2, 2, 2, 0, 2, 2, 2, 2, 2, 5, 2, 2, 2, 2, 2, 2, 2, 0, 2, 0, 2, 2, 2, 0, 2, 2, 0, 0, 0, 0, 0, 2, 2, 0, 2, 2, 0, 2, 0, 4, 4, 4, 4, 4, 4, 2,
-            2, 0, 2, 0, 2, 0, 2, 0, 0, 0, 0, 0, 2, 6, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 2, 0, 2, 0, 0, 0, 0, 2, 2, 2, 0, 0, 2, 0, 0, 0, 0, 2, 0, 4, 4, 4, 4, 4, 4, 2,
-            2, 0, 0, 0, 0, 0, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 0, 2, 0, 2, 2, 2, 2, 2, 2, 0, 2, 0, 2, 2, 0, 0, 0, 2, 2, 0, 2, 2, 2, 2, 0, 2, 0, 4, 4, 4, 4, 4, 4, 2,
+            2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2,
+            2, 0, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 0, 2, 0, 2, 2, 0, 2, 2, 0, 2, 0, 2, 0, 2, 2, 2, 0, 2, 0, 2, 0, 0, 0, 0, 0, 2,
+            2, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 2, 0, 0, 2, 2, 2, 0, 2, 0, 0, 2, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 2,
+            2, 0, 2, 0, 2, 2, 2, 0, 2, 2, 2, 2, 2, 5, 2, 2, 2, 2, 2, 2, 2, 0, 2, 0, 2, 2, 2, 0, 2, 2, 0, 0, 0, 0, 0, 2, 2, 0, 2, 2, 0, 2, 0, 2, 0, 0, 0, 0, 0, 2,
+            2, 0, 2, 0, 2, 0, 2, 0, 0, 0, 0, 0, 2, 6, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 2, 0, 2, 0, 0, 0, 0, 2, 2, 2, 0, 0, 2, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 2,
+            2, 0, 0, 0, 0, 0, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 0, 2, 0, 2, 2, 2, 2, 2, 2, 0, 2, 0, 2, 2, 0, 0, 0, 2, 2, 0, 2, 2, 2, 2, 0, 2, 0, 2, 2, 2, 2, 2, 2, 2,
             2, 2, 2, 0, 2, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2,
             2, 0, 0, 0, 2, 0, 2, 0, 2, 2, 2, 2, 0, 2, 0, 2, 0, 2, 0, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 0, 2, 0, 2, 2, 0, 2, 0, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 0, 2,
             2, 0, 2, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 2, 0, 2, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 2, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2,
@@ -50,6 +50,40 @@
             2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2,
             2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
         ]
+
+        var alphabet = [
+            ['A', 65],
+            ['B', 66],
+            ['C', 67],
+            ['D', 68],
+            ['E', 69],
+            ['F', 70],
+            ['G', 71],
+            ['H', 72],
+            ['I', 73],
+            ['J', 74],
+            ['K', 75],
+            ['L', 76],
+            ['M', 77],
+            ['N', 78],
+            ['O', 79],
+            ['P', 80],
+            ['Q', 81],
+            ['R', 82],
+            ['S', 83],
+            ['T', 84],
+            ['U', 85],
+            ['V', 86],
+            ['W', 87],
+            ['X', 88],
+            ['Y', 89],
+            ['Z', 90],
+        ];
+
+        var user = 'Username';
+        var undoUser = [];
+        var userChange = false;
+        var nameChange = false;
 
         var pixelSize = 20;
         var pXpos = 0;
@@ -81,15 +115,36 @@
         var enemy5xMove = 0;
         var enemy5yMove = 7;
 
+        var enemy6xPos = 20;
+        var enemy6yPos = 160;
+        var enemy6xMove = 0;
+        var enemy6yMove = 9;
+
+        var enemy7xPos = 400;
+        var enemy7yPos = 180;
+        var enemy7xMove = 9;
+        var enemy7yMove = 0;
+
+        var enemy8xPos = 360;
+        var enemy8yPos = 100;
+        var enemy8xMove = 0;
+        var enemy8yMove = 5;
+
         const W_KEY = 87;
         const A_KEY = 65;
         const S_KEY = 83;
         const D_KEY = 68;
+        const BACKSPACE_KEY = 8;
 
+        var mouseX = null;
+        var mouseY = null;
+        var mousePressed = null;
         var wKeyPressed = false;
         var aKeyPressed = false;
         var sKeyPressed = false;
         var dKeyPressed = false;
+        var backSpacePressed = false;
+        var inputKey = "";
 
         var wOneClick = false;
         var aOneClick = false;
@@ -100,6 +155,12 @@
         var invincibility = false;
         var powerUpPlaced = false;
 
+        var easyClicked = false;
+        var mediumClicked = false;
+        var hardClicked = false;
+
+        var logo = new Image();
+        logo.src = 'images/logo.png';
         var timerStart = false;
         var timeLeft = 0;
         var lastKeyPressed = null;
@@ -109,6 +170,7 @@
         var gameStarting = false;
         var playerLocation = 550;
         var steppedOn = 3;
+        var menuDisplay = true;
         var player = new Player(pXpos, pYpos, pixelSize, pixelSize, 'lime');
         var enemyCount = 4;
         var enemy1 = new Enemy(enemy1xPos, enemy1yPos, pixelSize, pixelSize, 'red', enemySpeed, enemy1xMove,
@@ -121,6 +183,12 @@
             enemy4yMove, displacement, enemyReversed);
         var enemy5 = new Enemy(enemy5xPos, enemy5yPos, pixelSize, pixelSize, 'red', enemySpeed, enemy5xMove,
             enemy5yMove, displacement, enemyReversed);
+        var enemy6 = new Enemy(enemy6xPos, enemy6yPos, pixelSize, pixelSize, 'red', enemySpeed, enemy6xMove,
+            enemy6yMove, displacement, enemyReversed);
+        var enemy7 = new Enemy(enemy7xPos, enemy7yPos, pixelSize, pixelSize, 'red', enemySpeed, enemy7xMove,
+            enemy7yMove, displacement, enemyReversed);
+        var enemy8 = new Enemy(enemy8xPos, enemy8yPos, pixelSize, pixelSize, 'red', enemySpeed, enemy8xMove,
+            enemy8yMove, displacement, enemyReversed);
 
         window.onload = function () {
             canvas = document.getElementById('gameCanvas');
@@ -128,16 +196,133 @@
 
             document.addEventListener('keydown', keyPressed);
             document.addEventListener('keyup', keyReleased);
-            
+
+            canvas.addEventListener('mousedown', function(evt) {
+                mousePressed = true;
+            });
+
+            canvas.addEventListener('mouseup', function(evt) {
+                mousePressed = false;
+            });
+
+            canvas.addEventListener('mousemove', function(evt) {
+				var mousePos = mouseAction(evt);
+				x = mousePos.x;
+				y = mousePos.y;
+			});
+ 
+            var x , y;
+
             setInterval(mainloop, 1000 / 50);
         }
         
         function mainloop() {
+            colorRect(0, 0, canvas.width, canvas.height, 'white');
+            // console.log(mousePressed);
             if (gameStarting) {
                 arrayMap[playerLocation] = 1;
                 gameStarting = false;
             }
-            colorRect(0, 0, canvas.width, canvas.height, 'white');
+            if (easyClicked) {
+                startGameEasy();
+            }
+            if (mediumClicked) {
+                startGameMedium();
+            }
+            if (hardClicked) {
+                startGameHard();
+            }
+            if (menuDisplay) {
+            menuBg();
+            usernameEntry();
+            easyButton();
+            mediumButton();
+            hardButton();
+            menuHitBoxes();
+            }
+            // console.log(steppedOn);
+        }
+
+        function usernameEntry() {
+            colorRect(canvas.width / 2 - 100, 145, 200, 50, 'black');
+            colorRect(canvas.width / 2 - 95, 150, 190, 40, 'white');
+            canvasContext.fillStyle = 'black';
+            canvasContext.font = '30px serif';
+            canvasContext.textAlign = 'center';
+            canvasContext.fillText(user, canvas.width / 2, 179, 200);
+
+            if (userChange && nameChange && user.length < 9) {
+                undoUser[user.length] = user;
+                user = user + inputKey;
+                nameChange = false;
+                inputKey = "";
+            }
+            if (backSpacePressed && user.length > 0) {
+                user = undoUser[user.length - 1];
+                backSpacePressed = false;
+            }
+        }
+
+        function easyButton() {
+            colorRect(canvas.width / 2 - 100, 200, 200, 50, 'black');
+            colorRect(canvas.width / 2 - 95, 205, 190, 40, 'white');
+            canvasContext.font = '30px serif';
+            canvasContext.textAlign = 'center';
+            canvasContext.fillStyle = 'black';
+            canvasContext.fillText('Easy', canvas.width / 2, 233);
+        } 
+
+        function mediumButton() {
+            colorRect(canvas.width / 2 - 100, 255, 200, 50, 'black');
+            colorRect(canvas.width / 2 - 95, 260, 190, 40, 'white');
+            canvasContext.font = '30px serif';
+            canvasContext.textAlign = 'center';
+            canvasContext.fillStyle = 'black';
+            canvasContext.fillText('Medium', canvas.width / 2, 288);
+        } 
+
+        function hardButton() {
+            colorRect(canvas.width / 2 - 100, 310, 200, 50, 'black');
+            colorRect(canvas.width / 2 - 95, 315, 190, 40, 'white');
+            canvasContext.font = '30px serif';
+            canvasContext.textAlign = 'center';
+            canvasContext.fillStyle = 'black';
+            canvasContext.fillText('Hard', canvas.width / 2, 343);
+        } 
+
+        function menuBg() {
+            mazeDraw();
+            enemy1.drawRect();
+            enemy1.move();
+            enemy2.drawRect();
+            enemy2.move();
+            enemy3.drawRect();
+            enemy3.move();
+            enemy4.drawRect();
+            enemy4.move();
+            colorRect(canvas.width / 2 - 200, 0, 400, canvas.height, 'rgba(255, 255, 255, 0.9');
+            drawImg (logo, canvas.width / 2 - 75, 50, 150, 80);
+        }
+
+        function startGameEasy() {
+            mazeDraw();
+            activePlayerLocation();
+            player.drawRect();
+            player.draw();
+            player.move();
+            player.power();
+            enemy1.drawRect();
+            enemy1.move();
+            enemy2.drawRect();
+            enemy2.move();
+            enemy3.drawRect();
+            enemy3.move();
+            trapWall();
+            powerUps();
+            timerDisplay();
+        }
+
+        function startGameMedium() {
             mazeDraw();
             activePlayerLocation();
             player.drawRect();
@@ -157,13 +342,137 @@
             trapWall();
             powerUps();
             timerDisplay();
-            // console.log(steppedOn);
-            console.log(timeLeft);
+        }
+
+        function startGameHard() {
+            mazeDraw();
+            activePlayerLocation();
+            player.drawRect();
+            player.draw();
+            player.move();
+            player.power();
+            enemy1.drawRect();
+            enemy1.move();
+            enemy2.drawRect();
+            enemy2.move();
+            enemy3.drawRect();
+            enemy3.move();
+            enemy4.drawRect();
+            enemy4.move();
+            enemy5.drawRect();
+            enemy5.move();
+            enemy6.drawRect();
+            enemy6.move();
+            enemy7.drawRect();
+            enemy7.move();
+            enemy8.drawRect();
+            enemy8.move();
+            trapWall();
+            powerUps();
+            timerDisplay();
+        }
+
+        function mouseAction(evt) {
+			var rect = canvas.getBoundingClientRect();
+			var root = document.documentElement;
+			x = evt.clientX - rect.left - root.scrollLeft;
+			y = evt.clientY - rect.top - root.scrollTop;
+            
+            mouseX = x;
+            mouseY = y;
+            
+            return {
+                x: x,
+                y: y
+            }
+        }
+        
+        function menuHitBoxes() {
+            if (menuDisplay) {
+                if ( mouseX > canvas.width / 2 - 100 && mouseX < canvas.width / 2 + 100 && 145 < mouseY && mouseY < 195 && mousePressed && userChange == false) {
+                    user = "";
+                    userChange = true;
+                }
+                
+                if ( mouseX > canvas.width / 2 - 100 && mouseX < canvas.width / 2 + 100 && 200 < mouseY && mouseY < 250 && mousePressed) {
+                    setEnemyVars();
+                    menuDisplay = false;
+                    easyClicked = true;
+                }
+                if ( mouseX > canvas.width / 2 - 100 && mouseX < canvas.width / 2 + 100 && 255 < mouseY && mouseY < 305 && mousePressed) {
+                    setEnemyVars();
+                    menuDisplay = false;
+                    mediumClicked = true;
+                }
+                if ( mouseX > canvas.width / 2 - 100 && mouseX < canvas.width / 2 + 100 && 310 < mouseY && mouseY < 360 && mousePressed) {
+                    setEnemyVars();
+                    menuDisplay = false;
+                    hardClicked = true;
+                }
+            }
         }
 
         function colorRect(x, y, w, h, c, z) {
             canvasContext.fillStyle = c;
             canvasContext.fillRect(x, y, w, h);
+        }
+        
+        function setEnemyVars() {
+        enemy1.x = 800;
+        enemy1.y = 20;
+        enemy1.xMove = 0;
+        enemy1.yMove = 15;
+        enemy1.d = 0;
+        enemy1.ed = false;
+
+        enemy2.x = 560;
+        enemy2.y = 380;
+        enemy2.xMove = 13;
+        enemy2.yMove = 0;
+        enemy2.d = 0;
+        enemy2.ed = false;
+
+        enemy3.x = 180;
+        enemy3.y = 320;
+        enemy3.xMove = 9;
+        enemy3.yMove = 0;
+        enemy3.d = 0;
+        enemy3.ed = false;
+
+        enemy4.x = 180;
+        enemy4.y = 60;
+        enemy4.xMove = 9;
+        enemy4.yMove = 0;
+        enemy4.d = 0;
+        enemy4.ed = false;
+
+        enemy5.x = 420;
+        enemy5.y = 280;
+        enemy5.xMove = 0;
+        enemy5.yMove = 7;
+        enemy5.d = 0;
+        enemy5.ed = false;
+
+        enemy6.x = 20;
+        enemy6.y = 160;
+        enemy6.xMove = 0;
+        enemy6.yMove = 9;
+        enemy6.d = 0;
+        enemy6.ed = false;
+
+        enemy7.x = 400;
+        enemy7.y = 180;
+        enemy7.xMove = 9;
+        enemy7.yMove = 0;
+        enemy7.d = 0;
+        enemy7.ed = false;
+
+        enemy8.x = 360;
+        enemy8.y = 100;
+        enemy8.xMove = 0;
+        enemy8.yMove = 5;
+        enemy8.d = 0;
+        enemy8.ed = false;
         }
 
         function activePlayerLocation() {
@@ -256,6 +565,10 @@
             }
         }
 
+        function drawImg(src, x, y, w, h) {
+            canvasContext.drawImage(src, x, y, w, h);
+        }
+
         function keyPressed(evt) {
             if (evt.keyCode == W_KEY && wOneClick == false) {
                 wKeyPressed = true;
@@ -272,6 +585,15 @@
             if (evt.keyCode == D_KEY && dOneClick == false) {
                 dKeyPressed = true;
                 dOneClick = true;
+            }
+            for (var i = 0; i < 26; i++) {
+                if (evt.keyCode == alphabet[i][1] && inputKey != alphabet[i][0]) {
+                    inputKey = alphabet[i][0];
+                    nameChange = true;
+                }
+            }
+            if (evt.keyCode == BACKSPACE_KEY && backSpacePressed == false) {
+                backSpacePressed = true;
             }
         }
 
