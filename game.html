@@ -22,14 +22,15 @@
         // 5 = Trap Trigger
         // 6 = Dummy Wall
         // 7 = Power Up
+        // 8 = Placeholder
 
         var arrayMap = [
             2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
-            2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2,
-            2, 0, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 0, 2, 0, 2, 2, 0, 2, 2, 0, 2, 0, 2, 0, 2, 2, 2, 0, 2, 0, 2, 0, 0, 0, 0, 0, 2,
-            2, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 2, 0, 0, 2, 2, 2, 0, 2, 0, 0, 2, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 2,
-            2, 0, 2, 0, 2, 2, 2, 0, 2, 2, 2, 2, 2, 5, 2, 2, 2, 2, 2, 2, 2, 0, 2, 0, 2, 2, 2, 0, 2, 2, 0, 0, 0, 0, 0, 2, 2, 0, 2, 2, 0, 2, 0, 2, 0, 0, 0, 0, 0, 2,
-            2, 0, 2, 0, 2, 0, 2, 0, 0, 0, 0, 0, 2, 6, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 2, 0, 2, 0, 0, 0, 0, 2, 2, 2, 0, 0, 2, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 2,
+            2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 8, 8, 8, 8, 8, 2,
+            2, 0, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 0, 2, 0, 2, 2, 0, 2, 2, 0, 2, 0, 2, 0, 2, 2, 2, 0, 2, 0, 2, 8, 8, 8, 8, 8, 2,
+            2, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 2, 0, 0, 2, 2, 2, 0, 2, 0, 0, 2, 0, 0, 2, 0, 2, 8, 8, 8, 8, 8, 2,
+            2, 0, 2, 0, 2, 2, 2, 0, 2, 2, 2, 2, 2, 5, 2, 2, 2, 2, 2, 2, 2, 0, 2, 0, 2, 2, 2, 0, 2, 2, 0, 0, 0, 0, 0, 2, 2, 0, 2, 2, 0, 2, 0, 2, 8, 8, 8, 8, 8, 2,
+            2, 0, 2, 0, 2, 0, 2, 0, 0, 0, 0, 0, 2, 6, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 2, 0, 2, 0, 0, 0, 0, 2, 2, 2, 0, 0, 2, 0, 0, 0, 0, 2, 0, 2, 8, 8, 8, 8, 8, 2,
             2, 0, 0, 0, 0, 0, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 0, 2, 0, 2, 2, 2, 2, 2, 2, 0, 2, 0, 2, 2, 0, 0, 0, 2, 2, 0, 2, 2, 2, 2, 0, 2, 0, 2, 2, 2, 2, 2, 2, 2,
             2, 2, 2, 0, 2, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2,
             2, 0, 0, 0, 2, 0, 2, 0, 2, 2, 2, 2, 0, 2, 0, 2, 0, 2, 0, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 0, 2, 0, 2, 2, 0, 2, 0, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 0, 2,
@@ -79,6 +80,8 @@
             ['Y', 89],
             ['Z', 90],
         ];
+
+        var liveCount = 5;
 
         var user = 'Username';
         var undoUser = [];
@@ -161,6 +164,13 @@
 
         var logo = new Image();
         logo.src = 'images/logo.png';
+
+        var mazeWall = new Image();
+        mazeWall.src = 'images/wall.png';
+
+        var bg = new Image();
+        bg.src = 'images/bg.png';
+
         var timerStart = false;
         var timeLeft = 0;
         var lastKeyPressed = null;
@@ -217,8 +227,8 @@
         }
         
         function mainloop() {
-            colorRect(0, 0, canvas.width, canvas.height, 'white');
-            // console.log(mousePressed);
+            drawImg (bg, 0, 0, canvas.width, canvas.height);
+            console.log(mousePressed);
             if (gameStarting) {
                 arrayMap[playerLocation] = 1;
                 gameStarting = false;
@@ -305,6 +315,7 @@
         }
 
         function startGameEasy() {
+            liveCount = 5;
             mazeDraw();
             activePlayerLocation();
             player.drawRect();
@@ -323,6 +334,7 @@
         }
 
         function startGameMedium() {
+            liveCount = 3;
             mazeDraw();
             activePlayerLocation();
             player.drawRect();
@@ -345,6 +357,7 @@
         }
 
         function startGameHard() {
+            liveCount = 1;
             mazeDraw();
             activePlayerLocation();
             player.drawRect();
@@ -496,7 +509,7 @@
                 powerUpPlaced = true;
             }}
         if (invincibility) {
-            canvasContext.fillText("Invincibility", 1002 - 4 * pixelSize, 52, 6 * pixelSize - 6);
+            canvasContext.fillText("Invincibility", 1002 - 3.5 * pixelSize, 52, 4.5 * pixelSize);
             if (timerStart == false) {
                 timer(10);
                 timerStart = true;
@@ -547,8 +560,7 @@
                 //     colorRect(((i - 50 * (Math.floor(i / 50 ))) * pixelSize), (Math.floor(i / 50)) * pixelSize, pixelSize, pixelSize, 'white');
                 // } 
                 if (arrayMap[i] == 2) {
-                    colorRect(((i - 50 * (Math.floor(i / 50))) * pixelSize), (Math.floor(i / 50)) * pixelSize,
-                        pixelSize, pixelSize, 'black');
+                        drawImg (mazeWall, ((i - 50 * (Math.floor(i / 50))) * pixelSize), (Math.floor(i / 50)) * pixelSize, pixelSize, pixelSize);
                 }
                 if (arrayMap[i] == 3) {
                     colorRect(((i - 50 * (Math.floor(i / 50))) * pixelSize), (Math.floor(i / 50)) * pixelSize,
