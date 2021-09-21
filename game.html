@@ -18,7 +18,7 @@
         // 1 = Player
         // 2 = MazeWall
         // 3 = StartPosition
-        // 4 = Placeholder
+        // 4 = EndPosition
         // 5 = Trap Trigger
         // 6 = Dummy Wall
         // 7 = Power Up
@@ -36,7 +36,7 @@
             2, 0, 0, 0, 2, 0, 2, 0, 2, 2, 2, 2, 0, 2, 0, 2, 0, 2, 0, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 0, 2, 0, 2, 2, 0, 2, 0, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 0, 2,
             2, 0, 2, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 2, 0, 2, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 2, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2,
             2, 0, 2, 0, 2, 0, 2, 2, 2, 0, 2, 0, 2, 2, 2, 2, 0, 2, 0, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 0, 2, 0, 2, 0, 2, 0, 2, 2, 2, 2, 2, 2, 2,
-            3, 0, 2, 0, 2, 0, 0, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 2, 0, 0, 2, 0, 2, 0, 2, 0, 2, 2, 0, 0, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 0, 2, 0, 2, 0, 0, 0, 0, 0, 3,
+            3, 0, 2, 0, 2, 0, 0, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 2, 0, 0, 2, 0, 2, 0, 2, 0, 2, 2, 0, 0, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 0, 2, 0, 2, 0, 0, 0, 0, 0, 4,
             2, 0, 2, 2, 2, 2, 2, 0, 2, 0, 2, 2, 2, 0, 2, 0, 2, 2, 2, 0, 2, 0, 0, 0, 0, 0, 0, 2, 0, 2, 2, 0, 2, 0, 2, 0, 2, 2, 0, 2, 0, 2, 0, 2, 0, 2, 2, 2, 2, 2,
             2, 0, 0, 0, 0, 0, 2, 0, 2, 0, 2, 0, 0, 0, 2, 0, 2, 0, 2, 0, 2, 2, 2, 2, 0, 2, 0, 2, 0, 2, 0, 0, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 0, 2, 0, 0, 0, 0, 0, 2,
             2, 0, 2, 2, 2, 0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 2, 0, 2, 0, 2, 0, 2, 2, 0, 2, 0, 2, 0, 2, 2, 0, 2, 0, 2, 2, 2, 2, 2, 0, 2,
@@ -231,6 +231,7 @@
             console.log(liveCount);
             if (gameStarting) {
                 arrayMap[playerLocation] = 1;
+                liveCount = 5;
                 gameStarting = false;
             }
             if (menuDisplay) {
@@ -242,18 +243,21 @@
                 usernameEntry();
             }
             if (liveCount > 0) {
-            if (easyClicked) {
-                startGameEasy();
+                if (easyClicked) {
+                    startGameEasy();
+                }
+                if (mediumClicked) {
+                    startGameMedium();
+                }
+                if (hardClicked) {
+                    startGameHard();
+                }
             }
-            if (mediumClicked) {
-                startGameMedium();
+            if (liveCount < 1) {
+                gameLose();
             }
-            if (hardClicked) {
-                startGameHard();
-            }
-            // console.log(steppedOn);
         }
-        }
+        
 
         function usernameEntry() {
             colorRect(canvas.width / 2 - 100, 145, 200, 50, 'black');
@@ -572,13 +576,9 @@
                     drawImg(mazeWall, ((i - 50 * (Math.floor(i / 50))) * pixelSize), (Math.floor(i / 50)) * pixelSize,
                         pixelSize, pixelSize);
                 }
-                if (arrayMap[i] == 3) {
+                if (arrayMap[i] == 3 || arrayMap[i] == 4) {
                     colorRect(((i - 50 * (Math.floor(i / 50))) * pixelSize), (Math.floor(i / 50)) * pixelSize,
                         pixelSize, pixelSize, 'yellow');
-                }
-                if (arrayMap[i] == 4) {
-                    colorRect(((i - 50 * (Math.floor(i / 50))) * pixelSize), (Math.floor(i / 50)) * pixelSize,
-                        pixelSize, pixelSize, 'blue');
                 }
                 if (arrayMap[i] == 7) {
                     colorRect(((i - 50 * (Math.floor(i / 50))) * pixelSize), (Math.floor(i / 50)) * pixelSize,
@@ -589,6 +589,28 @@
 
         function drawImg(src, x, y, w, h) {
             canvasContext.drawImage(src, x, y, w, h);
+        }
+
+        function gameLose() {
+            canvasContext.fillStyle = 'black';
+            canvasContext.font = '50px serif';
+            canvasContext.textAlign = 'center';
+            canvasContext.fillText("Game Over", canvas.width / 2, canvas.height / 4, canvas.width / 4);
+            canvasContext.fillText("You Lose", canvas.width / 2, canvas.height / 2, canvas.width / 4);
+            colorRect(canvas.width / 2 - 100, canvas.height * 5 / 8, 200, 50, 'black');
+            colorRect(canvas.width / 2 - 95, canvas.height * 5 / 8 + 5, 190, 40, 'white');
+            canvasContext.font = '30px serif';
+            canvasContext.textAlign = 'center';
+            canvasContext.fillStyle = 'black';
+            canvasContext.fillText('Back To Menu', canvas.width / 2, canvas.height * 5 / 8 + 33);
+            if (mouseX > canvas.width / 2 - 100 && mouseX < canvas.width / 2 + 100 && canvas.height * 5 / 8 < mouseY && mouseY <
+                    canvas.height * 5 / 8 + 50 && mousePressed && user.length > 0) {
+                        easyClicked = false;
+                        mediumClicked = false;
+                        hardClicked = false;
+                        menuDisplay = true;
+                    gameStarting = true;
+                }
         }
 
         function keyPressed(evt) {
