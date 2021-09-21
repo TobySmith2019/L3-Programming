@@ -79,5 +79,6 @@ class Player {
     steppedOn = 3;
     playerLocation = 550;
     this.c = 'lime';
+    liveCount --;
   }
 }

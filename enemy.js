@@ -18,13 +18,13 @@ class Enemy {
   }
   // ed = enemydirection
   move() {
-    if (easyClicked) {
+    if (easyClicked && menuDisplay == false) {
       this.v = 1;
     }
-    if (mediumClicked) {
+    if (mediumClicked && menuDisplay == false) {
       this.v = 2;
     }
-    if (hardClicked) {
+    if (hardClicked && menuDisplay == false) {
       this.v = 4;
     }
     this.collision();
