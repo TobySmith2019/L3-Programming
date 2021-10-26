@@ -82,6 +82,7 @@
         ];
 
         var liveCount = 5;
+        var dead = false;
 
         var user = 'Username';
         var undoUser = [];
@@ -228,6 +229,7 @@
 
         function mainloop() {
             drawImg(bg, 0, 0, canvas.width, canvas.height);
+            console.log(dead);
             console.log(liveCount);
             if (gameStarting) {
                 arrayMap[playerLocation] = 1;
@@ -242,7 +244,6 @@
                 menuHitBoxes();
                 usernameEntry();
             }
-            if (liveCount > 0) {
                 if (easyClicked) {
                     startGameEasy();
                 }
@@ -251,10 +252,11 @@
                 }
                 if (hardClicked) {
                     startGameHard();
+                    
                 }
-            }
             if (liveCount < 1) {
                 gameLose();
+                dead = true;
             }
         }
         
@@ -320,9 +322,10 @@
             drawImg(logo, canvas.width / 2 - 75, 50, 150, 80);
         }
 
-
         function startGameEasy() {
+            if (dead = false) {
                 liveCount = 5;
+                canvasContext.fillText("Lives: " + liveCount, 1002 - 3.5 * pixelSize, 52, 4.5 * pixelSize);
                 mazeDraw();
                 activePlayerLocation();
                 player.drawRect();
@@ -339,9 +342,12 @@
                 powerUps();
                 timerDisplay();
             }
+        }
 
         function startGameMedium() {
-            liveCount = 3;
+            if (dead = false) {
+                liveCount = 3;
+            canvasContext.fillText("Lives: " + liveCount, 1002 - 3.5 * pixelSize, 52, 4.5 * pixelSize);
             mazeDraw();
             activePlayerLocation();
             player.drawRect();
@@ -362,9 +368,12 @@
             powerUps();
             timerDisplay();
         }
+    }
 
         function startGameHard() {
+            if (dead == false) {
             liveCount = 1;
+            canvasContext.fillText("Lives: " + liveCount, 1002 - 3.5 * pixelSize, 52, 4.5 * pixelSize);
             mazeDraw();
             activePlayerLocation();
             player.drawRect();
@@ -390,6 +399,7 @@
             trapWall();
             powerUps();
             timerDisplay();
+            }
         }
 
         function mouseAction(evt) {
@@ -508,7 +518,7 @@
             canvasContext.font = '30px serif';
             canvasContext.textAlign = 'center';
             if (timerStart) {
-                canvasContext.fillText(timeLeft, 1002 - 4 * pixelSize, 102, 6 * pixelSize - 4);
+                canvasContext.fillText(timeLeft, 1002 - 3.6 * pixelSize, 114, 6 * pixelSize - 4);
             }
         }
 
@@ -522,7 +532,7 @@
                 }
             }
             if (invincibility) {
-                canvasContext.fillText("Invincibility", 1002 - 3.5 * pixelSize, 52, 4.5 * pixelSize);
+                canvasContext.fillText("Invincibility", 1002 - 3.5 * pixelSize, 85, 4.5 * pixelSize);
                 if (timerStart == false) {
                     timer(10);
                     timerStart = true;
@@ -592,6 +602,10 @@
         }
 
         function gameLose() {
+            easyClicked = false;
+            mediumClicked = false;
+            hardClicked = false;
+            if (dead) {
             canvasContext.fillStyle = 'black';
             canvasContext.font = '50px serif';
             canvasContext.textAlign = 'center';
@@ -605,12 +619,9 @@
             canvasContext.fillText('Back To Menu', canvas.width / 2, canvas.height * 5 / 8 + 33);
             if (mouseX > canvas.width / 2 - 100 && mouseX < canvas.width / 2 + 100 && canvas.height * 5 / 8 < mouseY && mouseY <
                     canvas.height * 5 / 8 + 50 && mousePressed && user.length > 0) {
-                        easyClicked = false;
-                        mediumClicked = false;
-                        hardClicked = false;
-                        menuDisplay = true;
-                    gameStarting = true;
+                        location.reload();
                 }
+            }
         }
 
         function keyPressed(evt) {
