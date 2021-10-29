@@ -47,7 +47,7 @@
             0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2,
             2, 0, 2, 0, 2, 0, 2, 2, 2, 0, 2, 0, 2, 2, 2, 2, 0, 2, 0, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2,
             2, 0, 2, 0, 2, 0, 2, 0, 2, 2, 2, 2, 2, 2, 2,
-            3, 0, 2, 0, 2, 0, 0, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 2, 0, 0, 2, 0, 2, 0, 2, 0, 2, 2, 0, 0, 0, 0, 2, 0, 2,
+            3, 4, 2, 0, 2, 0, 0, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 2, 0, 0, 2, 0, 2, 0, 2, 0, 2, 2, 0, 0, 0, 0, 2, 0, 2,
             0, 0, 2, 0, 2, 0, 2, 0, 2, 0, 0, 0, 0, 0, 4,
             2, 0, 2, 2, 2, 2, 2, 0, 2, 0, 2, 2, 2, 0, 2, 0, 2, 2, 2, 0, 2, 0, 0, 0, 0, 0, 0, 2, 0, 2, 2, 0, 2, 0, 2,
             0, 2, 2, 0, 2, 0, 2, 0, 2, 0, 2, 2, 2, 2, 2,
@@ -197,6 +197,7 @@
         var bg = new Image();
         bg.src = 'images/bg.png';
 
+        var score = 10000;
         var timerStart = false;
         var timeLeft = 0;
         var lastKeyPressed = null;
@@ -255,8 +256,8 @@
 
         function mainloop() {
             drawImg(bg, 0, 0, canvas.width, canvas.height);
-            console.log(dead);
-            console.log(liveCount);
+            console.log(user);
+            // console.log(liveCount);
             if (gameStarting) {
                 arrayMap[playerLocation] = 1;
                 liveCount = 5;
@@ -283,6 +284,7 @@
                 gameLose();
                 dead = true;
             }
+            player.win();
         }
 
 
@@ -648,7 +650,7 @@
                 canvasContext.font = '50px serif';
                 canvasContext.textAlign = 'center';
                 canvasContext.fillText("Game Over", canvas.width / 2, canvas.height / 4, canvas.width / 4);
-                canvasContext.fillText("You Lose", canvas.width / 2, canvas.height / 2, canvas.width / 4);
+                canvasContext.fillText("You Lose :(", canvas.width / 2, canvas.height / 2, canvas.width / 4);
                 colorRect(canvas.width / 2 - 100, canvas.height * 5 / 8, 200, 50, 'black');
                 colorRect(canvas.width / 2 - 95, canvas.height * 5 / 8 + 5, 190, 40, 'white');
                 canvasContext.font = '30px serif';

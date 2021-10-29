@@ -70,15 +70,37 @@ class Player {
     }
   }
 
-  draw() {
-    this.x = this.w * (playerLocation - 50 * (Math.floor(playerLocation / 50)));
-    this.y = this.h * (Math.floor(playerLocation / 50));
+  win() {
+    if (steppedOn == 4) {
+      easyClicked = false;
+      mediumClicked = false;
+      hardClicked = false;
+      canvasContext.fillStyle = 'black';
+      canvasContext.font = '50px serif';
+      canvasContext.textAlign = 'center';
+      canvasContext.fillText("You Win!!", canvas.width / 2, canvas.height / 6, canvas.width);
+      canvasContext.fillText("Your Score: " + score, canvas.width / 2, canvas.height / 3, canvas.width);
+      colorRect(canvas.width / 2 - 100, canvas.height * 6.5 / 8, 200, 50, 'black');
+      colorRect(canvas.width / 2 - 95, canvas.height * 6.5 / 8 + 5, 190, 40, 'white');
+      canvasContext.font = '30px serif';
+      canvasContext.textAlign = 'center';
+      canvasContext.fillStyle = 'black';
+      canvasContext.fillText('Back To Menu', canvas.width / 2, canvas.height * 6.5 / 8 + 33);
+      if (mouseX > canvas.width / 2 - 100 && mouseX < canvas.width / 2 + 100 && canvas.height * 5 / 8 < mouseY && mouseY < canvas.height * 5 / 8 + 50 && mousePressed && user.length > 0) {
+        location.reload();
+      }
+    }
   }
 
-  dead() {
-    steppedOn = 3;
-    playerLocation = 550;
-    this.c = 'lime';
-    liveCount--;
-  }
+draw() {
+  this.x = this.w * (playerLocation - 50 * (Math.floor(playerLocation / 50)));
+  this.y = this.h * (Math.floor(playerLocation / 50));
+}
+
+dead() {
+  steppedOn = 3;
+  playerLocation = 550;
+  this.c = 'lime';
+  liveCount--;
+}
 }
