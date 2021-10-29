@@ -207,6 +207,7 @@
             [],
             [],
         ];
+        var sort = [];
         var difficulty = 'Easy';
         var score = 10000;
         var timerStart = false;
@@ -685,7 +686,7 @@
                 highscores[i][2] = localStorage.getItem("difficulty" + i);
             }
             canvasContext.font = '15px serif';
-            for (var i = 0; i < 7; i++) {
+            for (var i = 0; i < localStorage.length / 3; i++) {
                 for (var p = 0; p < 2; p++) {
                     if (p == 0) {
                         canvasContext.fillText(highscores[i][p], canvas.width / 2 - 30 + 60 * p, canvas.height *
