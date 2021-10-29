@@ -18,38 +18,63 @@
         // 1 = Player
         // 2 = MazeWall
         // 3 = StartPosition
-        // 4 = Placeholder
+        // 4 = EndPosition
         // 5 = Trap Trigger
         // 6 = Dummy Wall
         // 7 = Power Up
         // 8 = Placeholder
 
         var arrayMap = [
-            2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
-            2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 8, 8, 8, 8, 8, 2,
-            2, 0, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 0, 2, 0, 2, 2, 0, 2, 2, 0, 2, 0, 2, 0, 2, 2, 2, 0, 2, 0, 2, 8, 8, 8, 8, 8, 2,
-            2, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 2, 0, 0, 2, 2, 2, 0, 2, 0, 0, 2, 0, 0, 2, 0, 2, 8, 8, 8, 8, 8, 2,
-            2, 0, 2, 0, 2, 2, 2, 0, 2, 2, 2, 2, 2, 5, 2, 2, 2, 2, 2, 2, 2, 0, 2, 0, 2, 2, 2, 0, 2, 2, 0, 0, 0, 0, 0, 2, 2, 0, 2, 2, 0, 2, 0, 2, 8, 8, 8, 8, 8, 2,
-            2, 0, 2, 0, 2, 0, 2, 0, 0, 0, 0, 0, 2, 6, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 2, 0, 2, 0, 0, 0, 0, 2, 2, 2, 0, 0, 2, 0, 0, 0, 0, 2, 0, 2, 8, 8, 8, 8, 8, 2,
-            2, 0, 0, 0, 0, 0, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 0, 2, 0, 2, 2, 2, 2, 2, 2, 0, 2, 0, 2, 2, 0, 0, 0, 2, 2, 0, 2, 2, 2, 2, 0, 2, 0, 2, 2, 2, 2, 2, 2, 2,
-            2, 2, 2, 0, 2, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2,
-            2, 0, 0, 0, 2, 0, 2, 0, 2, 2, 2, 2, 0, 2, 0, 2, 0, 2, 0, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 0, 2, 0, 2, 2, 0, 2, 0, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 0, 2,
-            2, 0, 2, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 2, 0, 2, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 2, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2,
-            2, 0, 2, 0, 2, 0, 2, 2, 2, 0, 2, 0, 2, 2, 2, 2, 0, 2, 0, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 0, 2, 0, 2, 0, 2, 0, 2, 2, 2, 2, 2, 2, 2,
-            3, 0, 2, 0, 2, 0, 0, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 2, 0, 0, 2, 0, 2, 0, 2, 0, 2, 2, 0, 0, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 0, 2, 0, 2, 0, 0, 0, 0, 0, 3,
-            2, 0, 2, 2, 2, 2, 2, 0, 2, 0, 2, 2, 2, 0, 2, 0, 2, 2, 2, 0, 2, 0, 0, 0, 0, 0, 0, 2, 0, 2, 2, 0, 2, 0, 2, 0, 2, 2, 0, 2, 0, 2, 0, 2, 0, 2, 2, 2, 2, 2,
-            2, 0, 0, 0, 0, 0, 2, 0, 2, 0, 2, 0, 0, 0, 2, 0, 2, 0, 2, 0, 2, 2, 2, 2, 0, 2, 0, 2, 0, 2, 0, 0, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 0, 2, 0, 0, 0, 0, 0, 2,
-            2, 0, 2, 2, 2, 0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 2, 0, 2, 0, 2, 0, 2, 2, 0, 2, 0, 2, 0, 2, 2, 0, 2, 0, 2, 2, 2, 2, 2, 0, 2,
-            2, 0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 2, 2, 2, 2, 2, 2, 0, 2, 0, 2, 2, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 2, 0, 0, 2, 0, 2, 0, 2, 0, 0, 0, 2, 0, 2,
-            2, 0, 2, 0, 2, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 0, 2, 2, 2, 0, 2, 0, 2, 0, 2,
-            2, 0, 2, 0, 2, 0, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 0, 2, 0, 2, 2, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0, 2, 0, 2,
-            2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 2, 0, 2, 0, 0, 2, 2, 0, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 0, 2,
-            2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 0, 2, 0, 2, 2, 0, 2, 0, 2, 0, 2, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2,
-            2, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 2, 2, 2, 0, 2, 0, 2, 0, 0, 2, 0, 2, 2, 2, 0, 2, 0, 0, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 0, 2, 0, 2, 0, 2,
-            2, 0, 2, 0, 2, 0, 0, 0, 2, 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2, 2, 0, 0, 0, 0, 0, 2, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2, 0, 2, 0, 2,
-            2, 0, 2, 2, 2, 2, 2, 0, 2, 0, 0, 2, 0, 2, 2, 2, 2, 2, 0, 2, 0, 0, 2, 0, 2, 2, 2, 0, 2, 0, 0, 2, 2, 2, 0, 2, 2, 2, 0, 2, 0, 2, 2, 2, 0, 2, 2, 2, 0, 2,
-            2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2,
-            2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+            2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+            2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+            2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0,
+            0, 0, 0, 0, 2, 0, 0, 0, 2, 8, 8, 8, 8, 8, 2,
+            2, 0, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 0, 2, 0, 2, 2, 0, 2, 2, 0, 2, 0,
+            2, 0, 2, 2, 2, 0, 2, 0, 2, 8, 8, 8, 8, 8, 2,
+            2, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 2, 0, 0, 2, 2, 2, 0,
+            2, 0, 0, 2, 0, 0, 2, 0, 2, 8, 8, 8, 8, 8, 2,
+            2, 0, 2, 0, 2, 2, 2, 0, 2, 2, 2, 2, 2, 5, 2, 2, 2, 2, 2, 2, 2, 0, 2, 0, 2, 2, 2, 0, 2, 2, 0, 0, 0, 0, 0,
+            2, 2, 0, 2, 2, 0, 2, 0, 2, 8, 8, 8, 8, 8, 2,
+            2, 0, 2, 0, 2, 0, 2, 0, 0, 0, 0, 0, 2, 6, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 2, 0, 2, 0, 0, 0, 0, 2, 2, 2, 0,
+            0, 2, 0, 0, 0, 0, 2, 0, 2, 8, 8, 8, 8, 8, 2,
+            2, 0, 0, 0, 0, 0, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 0, 2, 0, 2, 2, 2, 2, 2, 2, 0, 2, 0, 2, 2, 0, 0, 0, 2, 2,
+            0, 2, 2, 2, 2, 0, 2, 0, 2, 2, 2, 2, 2, 2, 2,
+            2, 2, 2, 0, 2, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 0,
+            0, 2, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2,
+            2, 0, 0, 0, 2, 0, 2, 0, 2, 2, 2, 2, 0, 2, 0, 2, 0, 2, 0, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 0, 2, 0, 2, 2,
+            0, 2, 0, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 0, 2,
+            2, 0, 2, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 2, 0, 2, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 2,
+            0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2,
+            2, 0, 2, 0, 2, 0, 2, 2, 2, 0, 2, 0, 2, 2, 2, 2, 0, 2, 0, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2,
+            2, 0, 2, 0, 2, 0, 2, 0, 2, 2, 2, 2, 2, 2, 2,
+            3, 4, 2, 0, 2, 0, 0, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 2, 0, 0, 2, 0, 2, 0, 2, 0, 2, 2, 0, 0, 0, 0, 2, 0, 2,
+            0, 0, 2, 0, 2, 0, 2, 0, 2, 0, 0, 0, 0, 0, 4,
+            2, 0, 2, 2, 2, 2, 2, 0, 2, 0, 2, 2, 2, 0, 2, 0, 2, 2, 2, 0, 2, 0, 0, 0, 0, 0, 0, 2, 0, 2, 2, 0, 2, 0, 2,
+            0, 2, 2, 0, 2, 0, 2, 0, 2, 0, 2, 2, 2, 2, 2,
+            2, 0, 0, 0, 0, 0, 2, 0, 2, 0, 2, 0, 0, 0, 2, 0, 2, 0, 2, 0, 2, 2, 2, 2, 0, 2, 0, 2, 0, 2, 0, 0, 0, 0, 2,
+            0, 2, 0, 0, 2, 0, 2, 0, 2, 0, 0, 0, 0, 0, 2,
+            2, 0, 2, 2, 2, 0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 2, 0, 2, 0, 2, 0, 2, 2, 0, 2,
+            0, 2, 0, 2, 2, 0, 2, 0, 2, 2, 2, 2, 2, 0, 2,
+            2, 0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 2, 2, 2, 2, 2, 2, 0, 2, 0, 2, 2, 0, 2, 0, 2, 0, 0, 0, 0, 0,
+            0, 2, 0, 0, 2, 0, 2, 0, 2, 0, 0, 0, 2, 0, 2,
+            2, 0, 2, 0, 2, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 2, 0, 2, 2, 2, 2, 2, 2,
+            2, 2, 2, 0, 2, 0, 2, 2, 2, 0, 2, 0, 2, 0, 2,
+            2, 0, 2, 0, 2, 0, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 0, 2, 0, 2, 2, 0, 2, 0, 0, 0, 0, 0, 2, 0,
+            0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0, 2, 0, 2,
+            2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 2, 0, 2, 0, 0, 2, 2, 0, 2, 2, 0, 2, 2,
+            2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 0, 2,
+            2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 0, 2, 0, 2, 2, 0, 2, 0, 2, 0, 2, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2,
+            2, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 2, 2, 2, 0, 2, 0, 2, 0, 0, 2, 0, 2, 2, 2, 0, 2, 0, 0, 2, 2, 2, 2, 0, 2,
+            2, 2, 2, 2, 2, 2, 2, 0, 2, 0, 2, 0, 2, 0, 2,
+            2, 0, 2, 0, 2, 0, 0, 0, 2, 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2, 2, 0, 0, 0, 0, 0, 2, 0, 2, 2, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2, 0, 2, 0, 2,
+            2, 0, 2, 2, 2, 2, 2, 0, 2, 0, 0, 2, 0, 2, 2, 2, 2, 2, 0, 2, 0, 0, 2, 0, 2, 2, 2, 0, 2, 0, 0, 2, 2, 2, 0,
+            2, 2, 2, 0, 2, 0, 2, 2, 2, 0, 2, 2, 2, 0, 2,
+            2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0,
+            0, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2,
+            2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+            2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
         ]
 
         var alphabet = [
@@ -82,6 +107,7 @@
         ];
 
         var liveCount = 5;
+        var dead = false;
 
         var user = 'Username';
         var undoUser = [];
@@ -171,6 +197,7 @@
         var bg = new Image();
         bg.src = 'images/bg.png';
 
+        var score = 10000;
         var timerStart = false;
         var timeLeft = 0;
         var lastKeyPressed = null;
@@ -178,6 +205,7 @@
         var enemyReversed = false;
         var displacement = 0;
         var gameStarting = false;
+        var roundStarting = false;
         var playerLocation = 550;
         var steppedOn = 3;
         var menuDisplay = true;
@@ -207,31 +235,41 @@
             document.addEventListener('keydown', keyPressed);
             document.addEventListener('keyup', keyReleased);
 
-            canvas.addEventListener('mousedown', function(evt) {
+            canvas.addEventListener('mousedown', function (evt) {
                 mousePressed = true;
             });
 
-            canvas.addEventListener('mouseup', function(evt) {
+            canvas.addEventListener('mouseup', function (evt) {
                 mousePressed = false;
             });
 
-            canvas.addEventListener('mousemove', function(evt) {
-				var mousePos = mouseAction(evt);
-				x = mousePos.x;
-				y = mousePos.y;
-			});
- 
-            var x , y;
+            canvas.addEventListener('mousemove', function (evt) {
+                var mousePos = mouseAction(evt);
+                x = mousePos.x;
+                y = mousePos.y;
+            });
+
+            var x, y;
 
             setInterval(mainloop, 1000 / 50);
         }
-        
+
         function mainloop() {
-            drawImg (bg, 0, 0, canvas.width, canvas.height);
-            console.log(mousePressed);
+            drawImg(bg, 0, 0, canvas.width, canvas.height);
+            console.log(user);
+            // console.log(liveCount);
             if (gameStarting) {
                 arrayMap[playerLocation] = 1;
+                liveCount = 5;
                 gameStarting = false;
+            }
+            if (menuDisplay) {
+                menuBg();
+                easyButton();
+                mediumButton();
+                hardButton();
+                menuHitBoxes();
+                usernameEntry();
             }
             if (easyClicked) {
                 startGameEasy();
@@ -242,16 +280,13 @@
             if (hardClicked) {
                 startGameHard();
             }
-            if (menuDisplay) {
-            menuBg();
-            usernameEntry();
-            easyButton();
-            mediumButton();
-            hardButton();
-            menuHitBoxes();
+            if (liveCount < 1) {
+                gameLose();
+                dead = true;
             }
-            // console.log(steppedOn);
+            player.win();
         }
+
 
         function usernameEntry() {
             colorRect(canvas.width / 2 - 100, 145, 200, 50, 'black');
@@ -280,7 +315,7 @@
             canvasContext.textAlign = 'center';
             canvasContext.fillStyle = 'black';
             canvasContext.fillText('Easy', canvas.width / 2, 233);
-        } 
+        }
 
         function mediumButton() {
             colorRect(canvas.width / 2 - 100, 255, 200, 50, 'black');
@@ -289,7 +324,7 @@
             canvasContext.textAlign = 'center';
             canvasContext.fillStyle = 'black';
             canvasContext.fillText('Medium', canvas.width / 2, 288);
-        } 
+        }
 
         function hardButton() {
             colorRect(canvas.width / 2 - 100, 310, 200, 50, 'black');
@@ -298,7 +333,7 @@
             canvasContext.textAlign = 'center';
             canvasContext.fillStyle = 'black';
             canvasContext.fillText('Hard', canvas.width / 2, 343);
-        } 
+        }
 
         function menuBg() {
             mazeDraw();
@@ -310,117 +345,144 @@
             enemy3.move();
             enemy4.drawRect();
             enemy4.move();
-            colorRect(canvas.width / 2 - 200, 0, 400, canvas.height, 'rgba(255, 255, 255, 0.9');
-            drawImg (logo, canvas.width / 2 - 75, 50, 150, 80);
+            colorRect(canvas.width / 2 - 200, 0, 400, canvas.height, 'rgba(105, 105, 105, 0.8');
+            drawImg(logo, canvas.width / 2 - 75, 50, 150, 80);
         }
 
         function startGameEasy() {
-            liveCount = 5;
-            mazeDraw();
-            activePlayerLocation();
-            player.drawRect();
-            player.draw();
-            player.move();
-            player.power();
-            enemy1.drawRect();
-            enemy1.move();
-            enemy2.drawRect();
-            enemy2.move();
-            enemy3.drawRect();
-            enemy3.move();
-            trapWall();
-            powerUps();
-            timerDisplay();
+            if (dead == false) {
+                if (roundStarting) {
+                    liveCount = 5;
+                    roundStarting = false;
+                }
+                canvasContext.fillText("Lives: " + liveCount, 1002 - 3.5 * pixelSize, 52, 4.5 * pixelSize);
+                mazeDraw();
+                activePlayerLocation();
+                player.drawRect();
+                player.draw();
+                player.move();
+                player.power();
+                enemy1.drawRect();
+                enemy1.move();
+                enemy2.drawRect();
+                enemy2.move();
+                enemy3.drawRect();
+                enemy3.move();
+                trapWall();
+                powerUps();
+                timerDisplay();
+            }
         }
 
         function startGameMedium() {
-            liveCount = 3;
-            mazeDraw();
-            activePlayerLocation();
-            player.drawRect();
-            player.draw();
-            player.move();
-            player.power();
-            enemy1.drawRect();
-            enemy1.move();
-            enemy2.drawRect();
-            enemy2.move();
-            enemy3.drawRect();
-            enemy3.move();
-            enemy4.drawRect();
-            enemy4.move();
-            enemy5.drawRect();
-            enemy5.move();
-            trapWall();
-            powerUps();
-            timerDisplay();
+            if (dead == false) {
+                if (roundStarting) {
+                    liveCount = 3;
+                    roundStarting = false;
+                    console.log('round started');
+                }
+                canvasContext.fillText("Lives: " + liveCount, 1002 - 3.5 * pixelSize, 52, 4.5 * pixelSize);
+                mazeDraw();
+                activePlayerLocation();
+                player.drawRect();
+                player.draw();
+                player.move();
+                player.power();
+                enemy1.drawRect();
+                enemy1.move();
+                enemy2.drawRect();
+                enemy2.move();
+                enemy3.drawRect();
+                enemy3.move();
+                enemy4.drawRect();
+                enemy4.move();
+                enemy5.drawRect();
+                enemy5.move();
+                trapWall();
+                powerUps();
+                timerDisplay();
+            }
         }
 
         function startGameHard() {
-            liveCount = 1;
-            mazeDraw();
-            activePlayerLocation();
-            player.drawRect();
-            player.draw();
-            player.move();
-            player.power();
-            enemy1.drawRect();
-            enemy1.move();
-            enemy2.drawRect();
-            enemy2.move();
-            enemy3.drawRect();
-            enemy3.move();
-            enemy4.drawRect();
-            enemy4.move();
-            enemy5.drawRect();
-            enemy5.move();
-            enemy6.drawRect();
-            enemy6.move();
-            enemy7.drawRect();
-            enemy7.move();
-            enemy8.drawRect();
-            enemy8.move();
-            trapWall();
-            powerUps();
-            timerDisplay();
+            if (dead == false) {
+                if (roundStarting) {
+                    liveCount = 1;
+                    roundStarting = false;
+                }
+                canvasContext.fillText("Lives: " + liveCount, 1002 - 3.5 * pixelSize, 52, 4.5 * pixelSize);
+                mazeDraw();
+                activePlayerLocation();
+                player.drawRect();
+                player.draw();
+                player.move();
+                player.power();
+                enemy1.drawRect();
+                enemy1.move();
+                enemy2.drawRect();
+                enemy2.move();
+                enemy3.drawRect();
+                enemy3.move();
+                enemy4.drawRect();
+                enemy4.move();
+                enemy5.drawRect();
+                enemy5.move();
+                enemy6.drawRect();
+                enemy6.move();
+                enemy7.drawRect();
+                enemy7.move();
+                enemy8.drawRect();
+                enemy8.move();
+                trapWall();
+                powerUps();
+                timerDisplay();
+            }
         }
 
         function mouseAction(evt) {
-			var rect = canvas.getBoundingClientRect();
-			var root = document.documentElement;
-			x = evt.clientX - rect.left - root.scrollLeft;
-			y = evt.clientY - rect.top - root.scrollTop;
-            
+            var rect = canvas.getBoundingClientRect();
+            var root = document.documentElement;
+            x = evt.clientX - rect.left - root.scrollLeft;
+            y = evt.clientY - rect.top - root.scrollTop;
+
             mouseX = x;
             mouseY = y;
-            
+
             return {
                 x: x,
                 y: y
             }
         }
-        
+
         function menuHitBoxes() {
             if (menuDisplay) {
-                if ( mouseX > canvas.width / 2 - 100 && mouseX < canvas.width / 2 + 100 && 145 < mouseY && mouseY < 195 && mousePressed && userChange == false) {
+                if (mouseX > canvas.width / 2 - 100 && mouseX < canvas.width / 2 + 100 && 145 < mouseY && mouseY <
+                    195 && mousePressed && userChange == false) {
                     user = "";
                     userChange = true;
+                    userError = false;
                 }
-                
-                if ( mouseX > canvas.width / 2 - 100 && mouseX < canvas.width / 2 + 100 && 200 < mouseY && mouseY < 250 && mousePressed) {
+
+                if (mouseX > canvas.width / 2 - 100 && mouseX < canvas.width / 2 + 100 && 200 < mouseY && mouseY <
+                    250 && mousePressed && user.length > 0) {
                     setEnemyVars();
                     menuDisplay = false;
                     easyClicked = true;
+                    roundStarting = true;
                 }
-                if ( mouseX > canvas.width / 2 - 100 && mouseX < canvas.width / 2 + 100 && 255 < mouseY && mouseY < 305 && mousePressed) {
+                if (mouseX > canvas.width / 2 - 100 && mouseX < canvas.width / 2 + 100 && 255 < mouseY && mouseY <
+                    305 && mousePressed && user.length > 0) {
                     setEnemyVars();
                     menuDisplay = false;
                     mediumClicked = true;
+                    roundStarting = true;
                 }
-                if ( mouseX > canvas.width / 2 - 100 && mouseX < canvas.width / 2 + 100 && 310 < mouseY && mouseY < 360 && mousePressed) {
+                if (mouseX > canvas.width / 2 - 100 && mouseX < canvas.width / 2 + 100 && 310 < mouseY && mouseY <
+                    360 && mousePressed && user.length > 0) {
                     setEnemyVars();
                     menuDisplay = false;
                     hardClicked = true;
+                    roundStarting = true;
                 }
             }
         }
@@ -429,63 +491,63 @@
             canvasContext.fillStyle = c;
             canvasContext.fillRect(x, y, w, h);
         }
-        
+
         function setEnemyVars() {
-        enemy1.x = 800;
-        enemy1.y = 20;
-        enemy1.xMove = 0;
-        enemy1.yMove = 15;
-        enemy1.d = 0;
-        enemy1.ed = false;
+            enemy1.x = 800;
+            enemy1.y = 20;
+            enemy1.xMove = 0;
+            enemy1.yMove = 15;
+            enemy1.d = 0;
+            enemy1.ed = false;
 
-        enemy2.x = 560;
-        enemy2.y = 380;
-        enemy2.xMove = 13;
-        enemy2.yMove = 0;
-        enemy2.d = 0;
-        enemy2.ed = false;
+            enemy2.x = 560;
+            enemy2.y = 380;
+            enemy2.xMove = 13;
+            enemy2.yMove = 0;
+            enemy2.d = 0;
+            enemy2.ed = false;
 
-        enemy3.x = 180;
-        enemy3.y = 320;
-        enemy3.xMove = 9;
-        enemy3.yMove = 0;
-        enemy3.d = 0;
-        enemy3.ed = false;
+            enemy3.x = 180;
+            enemy3.y = 320;
+            enemy3.xMove = 9;
+            enemy3.yMove = 0;
+            enemy3.d = 0;
+            enemy3.ed = false;
 
-        enemy4.x = 180;
-        enemy4.y = 60;
-        enemy4.xMove = 9;
-        enemy4.yMove = 0;
-        enemy4.d = 0;
-        enemy4.ed = false;
+            enemy4.x = 180;
+            enemy4.y = 60;
+            enemy4.xMove = 9;
+            enemy4.yMove = 0;
+            enemy4.d = 0;
+            enemy4.ed = false;
 
-        enemy5.x = 420;
-        enemy5.y = 280;
-        enemy5.xMove = 0;
-        enemy5.yMove = 7;
-        enemy5.d = 0;
-        enemy5.ed = false;
+            enemy5.x = 420;
+            enemy5.y = 280;
+            enemy5.xMove = 0;
+            enemy5.yMove = 7;
+            enemy5.d = 0;
+            enemy5.ed = false;
 
-        enemy6.x = 20;
-        enemy6.y = 160;
-        enemy6.xMove = 0;
-        enemy6.yMove = 9;
-        enemy6.d = 0;
-        enemy6.ed = false;
+            enemy6.x = 20;
+            enemy6.y = 160;
+            enemy6.xMove = 0;
+            enemy6.yMove = 9;
+            enemy6.d = 0;
+            enemy6.ed = false;
 
-        enemy7.x = 400;
-        enemy7.y = 180;
-        enemy7.xMove = 9;
-        enemy7.yMove = 0;
-        enemy7.d = 0;
-        enemy7.ed = false;
+            enemy7.x = 400;
+            enemy7.y = 180;
+            enemy7.xMove = 9;
+            enemy7.yMove = 0;
+            enemy7.d = 0;
+            enemy7.ed = false;
 
-        enemy8.x = 360;
-        enemy8.y = 100;
-        enemy8.xMove = 0;
-        enemy8.yMove = 5;
-        enemy8.d = 0;
-        enemy8.ed = false;
+            enemy8.x = 360;
+            enemy8.y = 100;
+            enemy8.xMove = 0;
+            enemy8.yMove = 5;
+            enemy8.d = 0;
+            enemy8.ed = false;
         }
 
         function activePlayerLocation() {
@@ -496,33 +558,34 @@
             canvasContext.font = '30px serif';
             canvasContext.textAlign = 'center';
             if (timerStart) {
-            canvasContext.fillText(timeLeft, 1002 - 4 * pixelSize, 102, 6 * pixelSize - 4);
+                canvasContext.fillText(timeLeft, 1002 - 3.6 * pixelSize, 114, 6 * pixelSize - 4);
             }
         }
 
         function powerUps() {
             if (arrayMap[invincibilityLocation] != 0 && powerUpPlaced == false) {
                 invincibilityLocation = Math.floor(Math.random() * 1249);
-            
-            if (arrayMap[invincibilityLocation] == 0) {
-                arrayMap[invincibilityLocation] = 7;
-                powerUpPlaced = true;
-            }}
-        if (invincibility) {
-            canvasContext.fillText("Invincibility", 1002 - 3.5 * pixelSize, 52, 4.5 * pixelSize);
-            if (timerStart == false) {
-                timer(10);
-                timerStart = true;
+
+                if (arrayMap[invincibilityLocation] == 0) {
+                    arrayMap[invincibilityLocation] = 7;
+                    powerUpPlaced = true;
+                }
             }
-        }
+            if (invincibility) {
+                canvasContext.fillText("Invincibility", 1002 - 3.5 * pixelSize, 85, 4.5 * pixelSize);
+                if (timerStart == false) {
+                    timer(10);
+                    timerStart = true;
+                }
+            }
         }
 
         function timer(num) {
             timeLeft = num;
-            setInterval(function() {
-                if (timeLeft >= 1) { 
-                timeLeft -= 1;
-                } 
+            setInterval(function () {
+                if (timeLeft >= 1) {
+                    timeLeft -= 1;
+                }
                 if (timeLeft < 1) {
                     timerStart = false;
                 }
@@ -560,15 +623,12 @@
                 //     colorRect(((i - 50 * (Math.floor(i / 50 ))) * pixelSize), (Math.floor(i / 50)) * pixelSize, pixelSize, pixelSize, 'white');
                 // } 
                 if (arrayMap[i] == 2) {
-                        drawImg (mazeWall, ((i - 50 * (Math.floor(i / 50))) * pixelSize), (Math.floor(i / 50)) * pixelSize, pixelSize, pixelSize);
+                    drawImg(mazeWall, ((i - 50 * (Math.floor(i / 50))) * pixelSize), (Math.floor(i / 50)) * pixelSize,
+                        pixelSize, pixelSize);
                 }
-                if (arrayMap[i] == 3) {
+                if (arrayMap[i] == 3 || arrayMap[i] == 4) {
                     colorRect(((i - 50 * (Math.floor(i / 50))) * pixelSize), (Math.floor(i / 50)) * pixelSize,
                         pixelSize, pixelSize, 'yellow');
-                }
-                if (arrayMap[i] == 4) {
-                    colorRect(((i - 50 * (Math.floor(i / 50))) * pixelSize), (Math.floor(i / 50)) * pixelSize,
-                        pixelSize, pixelSize, 'blue');
                 }
                 if (arrayMap[i] == 7) {
                     colorRect(((i - 50 * (Math.floor(i / 50))) * pixelSize), (Math.floor(i / 50)) * pixelSize,
@@ -579,6 +639,30 @@
 
         function drawImg(src, x, y, w, h) {
             canvasContext.drawImage(src, x, y, w, h);
+        }
+
+        function gameLose() {
+            easyClicked = false;
+            mediumClicked = false;
+            hardClicked = false;
+            if (dead) {
+                canvasContext.fillStyle = 'black';
+                canvasContext.font = '50px serif';
+                canvasContext.textAlign = 'center';
+                canvasContext.fillText("Game Over", canvas.width / 2, canvas.height / 4, canvas.width / 4);
+                canvasContext.fillText("You Lose :(", canvas.width / 2, canvas.height / 2, canvas.width / 4);
+                colorRect(canvas.width / 2 - 100, canvas.height * 5 / 8, 200, 50, 'black');
+                colorRect(canvas.width / 2 - 95, canvas.height * 5 / 8 + 5, 190, 40, 'white');
+                canvasContext.font = '30px serif';
+                canvasContext.textAlign = 'center';
+                canvasContext.fillStyle = 'black';
+                canvasContext.fillText('Back To Menu', canvas.width / 2, canvas.height * 5 / 8 + 33);
+                if (mouseX > canvas.width / 2 - 100 && mouseX < canvas.width / 2 + 100 && canvas.height * 5 / 8 <
+                    mouseY && mouseY <
+                    canvas.height * 5 / 8 + 50 && mousePressed && user.length > 0) {
+                    location.reload();
+                }
+            }
         }
 
         function keyPressed(evt) {
