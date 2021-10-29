@@ -72,9 +72,17 @@ class Player {
 
   win() {
     if (steppedOn == 4) {
-      easyClicked = false;
-      mediumClicked = false;
-      hardClicked = false;
+      if (easyClicked || mediumClicked || hardClicked) {
+        highscores.push([user, score, difficulty]);
+        localStorage.setItem("user" + user + score, highscores[highscores.length - 1][0]);
+        localStorage.setItem("score" + user + score, highscores[highscores.length - 1][1]);
+        localStorage.setItem("difficulty" + user + score, highscores[highscores.length - 1][2]);
+        easyClicked = false;
+        mediumClicked = false;
+        hardClicked = false;
+        var test = localStorage.getItem("difficulty" + user + score);
+        console.log(test);
+      }
       canvasContext.fillStyle = 'black';
       canvasContext.font = '50px serif';
       canvasContext.textAlign = 'center';
@@ -89,18 +97,22 @@ class Player {
       if (mouseX > canvas.width / 2 - 100 && mouseX < canvas.width / 2 + 100 && canvas.height * 6.5 / 8 < mouseY && mouseY < canvas.height * 6.5 / 8 + 50 && mousePressed && user.length > 0) {
         location.reload();
       }
+      // highscores[0][0] = user; 
+      // highscores[0][1] = score; 
+      // highscores[0][2] = difficulty; 
+      scoreTable();
     }
   }
 
-draw() {
-  this.x = this.w * (playerLocation - 50 * (Math.floor(playerLocation / 50)));
-  this.y = this.h * (Math.floor(playerLocation / 50));
-}
+  draw() {
+    this.x = this.w * (playerLocation - 50 * (Math.floor(playerLocation / 50)));
+    this.y = this.h * (Math.floor(playerLocation / 50));
+  }
 
-dead() {
-  steppedOn = 3;
-  playerLocation = 550;
-  this.c = 'lime';
-  liveCount--;
-}
+  dead() {
+    steppedOn = 3;
+    playerLocation = 550;
+    this.c = 'lime';
+    liveCount--;
+  }
 }
