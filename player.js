@@ -60,11 +60,11 @@ class Player {
       this.c = 'pink';
     } else {
       this.c = 'lime';
-  }
+    }
     if (steppedOn == 7) {
       invincibility = true;
       steppedOn = 0;
-      setTimeout(function() {
+      setTimeout(function () {
         invincibility = false;
       }, 10000);
     }
@@ -79,6 +79,6 @@ class Player {
     steppedOn = 3;
     playerLocation = 550;
     this.c = 'lime';
-    liveCount --;
+    liveCount--;
   }
 }
