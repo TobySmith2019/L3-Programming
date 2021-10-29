@@ -256,7 +256,7 @@
 
         function mainloop() {
             drawImg(bg, 0, 0, canvas.width, canvas.height);
-            console.log(user);
+            // console.log(score);
             // console.log(liveCount);
             if (gameStarting) {
                 arrayMap[playerLocation] = 1;
@@ -355,7 +355,13 @@
                     liveCount = 5;
                     roundStarting = false;
                 }
+                canvasContext.fillStyle = 'blue';
                 canvasContext.fillText("Lives: " + liveCount, 1002 - 3.5 * PIXEL_SIZE, 52, 4.5 * PIXEL_SIZE);
+                if (invincibility == false) {
+                    canvasContext.fillText("Score:", 1002 - 3.5 * PIXEL_SIZE, 3 * PIXEL_SIZE + 20, 4.5 * PIXEL_SIZE);
+                    canvasContext.fillText(Math.floor(score), 1002 - 3.5 * PIXEL_SIZE, 4 * PIXEL_SIZE + 35, 4.5 *
+                        PIXEL_SIZE);
+                }
                 mazeDraw();
                 activePlayerLocation();
                 player.drawRect();
@@ -371,6 +377,7 @@
                 trapWall();
                 powerUps();
                 timerDisplay();
+                score -= 0.1;
             }
         }
 
@@ -379,9 +386,15 @@
                 if (roundStarting) {
                     liveCount = 3;
                     roundStarting = false;
-                    console.log('round started');
                 }
-                canvasContext.fillText("Lives: " + liveCount, 1002 - 3.5 * PIXEL_SIZE, 52, 4.5 * PIXEL_SIZE);
+                canvasContext.fillStyle = 'yellow';
+                canvasContext.fillText("Lives: " + liveCount, 1002 - 3.5 * PIXEL_SIZE, 2 * PIXEL_SIZE + 5, 4.5 *
+                    PIXEL_SIZE);
+                if (invincibility == false) {
+                    canvasContext.fillText("Score:", 1002 - 3.5 * PIXEL_SIZE, 3 * PIXEL_SIZE + 20, 4.5 * PIXEL_SIZE);
+                    canvasContext.fillText(Math.floor(score), 1002 - 3.5 * PIXEL_SIZE, 4 * PIXEL_SIZE + 35, 4.5 *
+                        PIXEL_SIZE);
+                }
                 mazeDraw();
                 activePlayerLocation();
                 player.drawRect();
@@ -401,6 +414,7 @@
                 trapWall();
                 powerUps();
                 timerDisplay();
+                score -= 0.1;
             }
         }
 
@@ -410,7 +424,13 @@
                     liveCount = 1;
                     roundStarting = false;
                 }
+                canvasContext.fillStyle = 'red';
                 canvasContext.fillText("Lives: " + liveCount, 1002 - 3.5 * PIXEL_SIZE, 52, 4.5 * PIXEL_SIZE);
+                if (invincibility == false) {
+                    canvasContext.fillText("Score:", 1002 - 3.5 * PIXEL_SIZE, 3 * PIXEL_SIZE + 20, 4.5 * PIXEL_SIZE);
+                    canvasContext.fillText(Math.floor(score), 1002 - 3.5 * PIXEL_SIZE, 4 * PIXEL_SIZE + 35, 4.5 *
+                        PIXEL_SIZE);
+                }
                 mazeDraw();
                 activePlayerLocation();
                 player.drawRect();
@@ -436,6 +456,7 @@
                 trapWall();
                 powerUps();
                 timerDisplay();
+                score -= 0.1;
             }
         }
 

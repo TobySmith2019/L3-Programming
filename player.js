@@ -79,7 +79,7 @@ class Player {
       canvasContext.font = '50px serif';
       canvasContext.textAlign = 'center';
       canvasContext.fillText("You Win!!", canvas.width / 2, canvas.height / 6, canvas.width);
-      canvasContext.fillText("Your Score: " + score, canvas.width / 2, canvas.height / 3, canvas.width);
+      canvasContext.fillText("Your Score: " + Math.floor(score), canvas.width / 2, canvas.height / 3, canvas.width);
       colorRect(canvas.width / 2 - 100, canvas.height * 6.5 / 8, 200, 50, 'black');
       colorRect(canvas.width / 2 - 95, canvas.height * 6.5 / 8 + 5, 190, 40, 'white');
       canvasContext.font = '30px serif';
