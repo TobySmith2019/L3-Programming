@@ -197,7 +197,16 @@
         var bg = new Image();
         bg.src = 'images/bg.png';
 
-        var highscores = [];
+        var highscores = [
+            [],
+            [],
+            [],
+            [],
+            [],
+            [],
+            [],
+            [],
+        ];
         var difficulty = 'Easy';
         var score = 10000;
         var timerStart = false;
@@ -670,6 +679,11 @@
         function scoreTable() {
             canvasContext.fillText("Highscores For " + difficulty + " Game Mode:", canvas.width / 2, canvas.height * 3 /
                 7, canvas.width);
+            for (var i = 0; i < localStorage.length / 3; i++) {
+                highscores[i][0] = localStorage.getItem("user" + i);
+                highscores[i][1] = localStorage.getItem("score" + i);
+                highscores[i][2] = localStorage.getItem("difficulty" + i);
+            }
             canvasContext.font = '15px serif';
             for (var i = 0; i < 7; i++) {
                 for (var p = 0; p < 2; p++) {

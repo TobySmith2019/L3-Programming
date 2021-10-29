@@ -73,10 +73,21 @@ class Player {
   win() {
     if (steppedOn == 4) {
       if (easyClicked || mediumClicked || hardClicked) {
-        highscores.push([user, score, difficulty]);
-        localStorage.setItem("user" + user + score, highscores[highscores.length - 1][0]);
-        localStorage.setItem("score" + user + score, highscores[highscores.length - 1][1]);
-        localStorage.setItem("difficulty" + user + score, highscores[highscores.length - 1][2]);
+        var scoreSaved = false;
+        for (var i = 0; i < localStorage.length / 3; i++) {
+          highscores[i][0] = localStorage.getItem("user" + i);
+          highscores[i][1] = localStorage.getItem("score" + i);
+          highscores[i][2] = localStorage.getItem("difficulty" + i);
+        }
+        for (var i = 0; i < 7; i++) {
+          if (highscores[i].length == 0 && scoreSaved == false) {
+            localStorage.setItem("user" + i, user);
+            localStorage.setItem("score" + i, score);
+            localStorage.setItem("difficulty" + i, difficulty);
+            scoreSaved = true;
+            // highscores.length = 8;
+          }
+        }
         easyClicked = false;
         mediumClicked = false;
         hardClicked = false;
