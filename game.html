@@ -47,7 +47,7 @@
             0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2,
             2, 0, 2, 0, 2, 0, 2, 2, 2, 0, 2, 0, 2, 2, 2, 2, 0, 2, 0, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2,
             2, 0, 2, 0, 2, 0, 2, 0, 2, 2, 2, 2, 2, 2, 2,
-            3, 0, 2, 0, 2, 0, 0, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 2, 0, 0, 2, 0, 2, 0, 2, 0, 2, 2, 0, 0, 0, 0, 2, 0, 2,
+            3, 4, 2, 0, 2, 0, 0, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 2, 0, 0, 2, 0, 2, 0, 2, 0, 2, 2, 0, 0, 0, 0, 2, 0, 2,
             0, 0, 2, 0, 2, 0, 2, 0, 2, 0, 0, 0, 0, 0, 4,
             2, 0, 2, 2, 2, 2, 2, 0, 2, 0, 2, 2, 2, 0, 2, 0, 2, 2, 2, 0, 2, 0, 0, 0, 0, 0, 0, 2, 0, 2, 2, 0, 2, 0, 2,
             0, 2, 2, 0, 2, 0, 2, 0, 2, 0, 2, 2, 2, 2, 2,
@@ -197,6 +197,18 @@
         var bg = new Image();
         bg.src = 'images/bg.png';
 
+        var highscores = [
+            [],
+            [],
+            [],
+            [],
+            [],
+            [],
+            [],
+            [],
+        ];
+        var sort = [];
+        var difficulty = 'Easy';
         var score = 10000;
         var timerStart = false;
         var timeLeft = 0;
@@ -273,12 +285,15 @@
             }
             if (easyClicked) {
                 startGameEasy();
+                difficulty = 'Easy';
             }
             if (mediumClicked) {
                 startGameMedium();
+                difficulty = 'Medium';
             }
             if (hardClicked) {
                 startGameHard();
+                difficulty = 'Hard';
             }
             if (liveCount < 1) {
                 gameLose();
@@ -660,6 +675,30 @@
 
         function drawImg(src, x, y, w, h) {
             canvasContext.drawImage(src, x, y, w, h);
+        }
+
+        function scoreTable() {
+            canvasContext.fillText("Highscores For " + difficulty + " Game Mode:", canvas.width / 2, canvas.height * 3 /
+                7, canvas.width);
+            for (var i = 0; i < localStorage.length / 3; i++) {
+                highscores[i][0] = localStorage.getItem("user" + i);
+                highscores[i][1] = localStorage.getItem("score" + i);
+                highscores[i][2] = localStorage.getItem("difficulty" + i);
+            }
+            canvasContext.font = '15px serif';
+            for (var i = 0; i < localStorage.length / 3; i++) {
+                for (var p = 0; p < 2; p++) {
+                    if (p == 0) {
+                        canvasContext.fillText(highscores[i][p], canvas.width / 2 - 30 + 60 * p, canvas.height *
+                            3 / 7 + 20 * (i + 2), canvas.width / 4);
+                    }
+                    if (p == 1) {
+                        canvasContext.fillText(Math.floor(highscores[i][p]), canvas.width / 2 - 30 + 60 * p, canvas
+                            .height *
+                            3 / 7 + 20 * (i + 2), canvas.width / 4);
+                    }
+                }
+            }
         }
 
         function gameLose() {

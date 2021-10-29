@@ -70,11 +70,65 @@ class Player {
     }
   }
 
+  sort() {
+    for (var i = 0; i < localStorage.length / 3; i++) {
+      highscores[i][0] = localStorage.getItem("user" + i);
+      highscores[i][1] = localStorage.getItem("score" + i);
+      highscores[i][2] = localStorage.getItem("difficulty" + i);
+    }
+    for (var i = 0; i < localStorage.length / 3; i++) {
+      sort[i] = highscores[i][1];
+      sort.sort(function (a, b) {
+        return b - a
+      });
+    }
+    for (var p = 0; p < localStorage.length / 3; p++) {
+      for (var i = 0; i < localStorage.length / 3; i++) {
+        if (sort[p] == highscores[i][1]) {
+          localStorage.setItem("user" + p, highscores[i][0]);
+          localStorage.setItem("score" + p, highscores[i][1]);
+          localStorage.setItem("difficulty" + p, highscores[i][2]);
+        }
+      }
+    }
+  }
+
   win() {
     if (steppedOn == 4) {
-      easyClicked = false;
-      mediumClicked = false;
-      hardClicked = false;
+      if (easyClicked || mediumClicked || hardClicked) {
+        var scoreSaved = false;
+        if (localStorage.length > 0 && localStorage.length < 21) {
+          for (var i = 0; i < localStorage.length / 3; i++) {
+            highscores[i][0] = localStorage.getItem("user" + i);
+            highscores[i][1] = localStorage.getItem("score" + i);
+            highscores[i][2] = localStorage.getItem("difficulty" + i);
+          }
+          for (var i = 0; i < localStorage.length / 3 + 1; i++) {
+            if (highscores[i].length == 0 && scoreSaved == false) {
+              localStorage.setItem("user" + i, user);
+              localStorage.setItem("score" + i, score);
+              localStorage.setItem("difficulty" + i, difficulty);
+              scoreSaved = true;
+            }
+          }
+          this.sort()
+        } else if (localStorage.length == 0) {
+          localStorage.setItem("user0", user);
+          localStorage.setItem("score0", score);
+          localStorage.setItem("difficulty0", difficulty);
+          scoreSaved = true;
+        } else {
+          localStorage.setItem("user6", user);
+          localStorage.setItem("score6", score);
+          localStorage.setItem("difficulty6", difficulty);
+          this.sort();
+        }
+        easyClicked = false;
+        mediumClicked = false;
+        hardClicked = false;
+        var test = localStorage.getItem("difficulty" + user + score);
+        console.log(test);
+      }
       canvasContext.fillStyle = 'black';
       canvasContext.font = '50px serif';
       canvasContext.textAlign = 'center';
@@ -89,18 +143,22 @@ class Player {
       if (mouseX > canvas.width / 2 - 100 && mouseX < canvas.width / 2 + 100 && canvas.height * 6.5 / 8 < mouseY && mouseY < canvas.height * 6.5 / 8 + 50 && mousePressed && user.length > 0) {
         location.reload();
       }
+      // highscores[0][0] = user; 
+      // highscores[0][1] = score; 
+      // highscores[0][2] = difficulty; 
+      scoreTable();
     }
   }
 
-draw() {
-  this.x = this.w * (playerLocation - 50 * (Math.floor(playerLocation / 50)));
-  this.y = this.h * (Math.floor(playerLocation / 50));
-}
+  draw() {
+    this.x = this.w * (playerLocation - 50 * (Math.floor(playerLocation / 50)));
+    this.y = this.h * (Math.floor(playerLocation / 50));
+  }
 
-dead() {
-  steppedOn = 3;
-  playerLocation = 550;
-  this.c = 'lime';
-  liveCount--;
-}
+  dead() {
+    steppedOn = 3;
+    playerLocation = 550;
+    this.c = 'lime';
+    liveCount--;
+  }
 }
