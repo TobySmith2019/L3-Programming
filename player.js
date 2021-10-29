@@ -86,7 +86,7 @@ class Player {
       canvasContext.textAlign = 'center';
       canvasContext.fillStyle = 'black';
       canvasContext.fillText('Back To Menu', canvas.width / 2, canvas.height * 6.5 / 8 + 33);
-      if (mouseX > canvas.width / 2 - 100 && mouseX < canvas.width / 2 + 100 && canvas.height * 5 / 8 < mouseY && mouseY < canvas.height * 5 / 8 + 50 && mousePressed && user.length > 0) {
+      if (mouseX > canvas.width / 2 - 100 && mouseX < canvas.width / 2 + 100 && canvas.height * 6.5 / 8 < mouseY && mouseY < canvas.height * 6.5 / 8 + 50 && mousePressed && user.length > 0) {
         location.reload();
       }
     }

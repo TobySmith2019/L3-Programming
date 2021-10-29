@@ -36,11 +36,11 @@ class Enemy {
         this.y -= this.v;
       }
 
-      if (Math.floor(this.y / pixelSize) == (this.y / pixelSize) && this.ed == false) {
+      if (Math.floor(this.y / PIXEL_SIZE) == (this.y / PIXEL_SIZE) && this.ed == false) {
         this.d++;
       }
 
-      if (Math.floor(this.y / pixelSize) == (this.y / pixelSize) && this.ed == true) {
+      if (Math.floor(this.y / PIXEL_SIZE) == (this.y / PIXEL_SIZE) && this.ed == true) {
         this.d--;
       }
 
@@ -59,11 +59,11 @@ class Enemy {
         this.x -= this.v;
       }
 
-      if (Math.floor(this.x / pixelSize) == (this.x / pixelSize) && this.ed == false) {
+      if (Math.floor(this.x / PIXEL_SIZE) == (this.x / PIXEL_SIZE) && this.ed == false) {
         this.d++;
       }
 
-      if (Math.floor(this.x / pixelSize) == (this.x / pixelSize) && this.ed == true) {
+      if (Math.floor(this.x / PIXEL_SIZE) == (this.x / PIXEL_SIZE) && this.ed == true) {
         this.d--;
       }
 

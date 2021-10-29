@@ -47,7 +47,7 @@
             0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2,
             2, 0, 2, 0, 2, 0, 2, 2, 2, 0, 2, 0, 2, 2, 2, 2, 0, 2, 0, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2,
             2, 0, 2, 0, 2, 0, 2, 0, 2, 2, 2, 2, 2, 2, 2,
-            3, 4, 2, 0, 2, 0, 0, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 2, 0, 0, 2, 0, 2, 0, 2, 0, 2, 2, 0, 0, 0, 0, 2, 0, 2,
+            3, 0, 2, 0, 2, 0, 0, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 2, 0, 0, 2, 0, 2, 0, 2, 0, 2, 2, 0, 0, 0, 0, 2, 0, 2,
             0, 0, 2, 0, 2, 0, 2, 0, 2, 0, 0, 0, 0, 0, 4,
             2, 0, 2, 2, 2, 2, 2, 0, 2, 0, 2, 2, 2, 0, 2, 0, 2, 2, 2, 0, 2, 0, 0, 0, 0, 0, 0, 2, 0, 2, 2, 0, 2, 0, 2,
             0, 2, 2, 0, 2, 0, 2, 0, 2, 0, 2, 2, 2, 2, 2,
@@ -114,7 +114,7 @@
         var userChange = false;
         var nameChange = false;
 
-        var pixelSize = 20;
+        const PIXEL_SIZE = 20;
         var pXpos = 0;
         var pYpos = 0;
         var enemySpeed = 2;
@@ -209,23 +209,23 @@
         var playerLocation = 550;
         var steppedOn = 3;
         var menuDisplay = true;
-        var player = new Player(pXpos, pYpos, pixelSize, pixelSize, 'lime');
+        var player = new Player(pXpos, pYpos, PIXEL_SIZE, PIXEL_SIZE, 'lime');
         var enemyCount = 4;
-        var enemy1 = new Enemy(enemy1xPos, enemy1yPos, pixelSize, pixelSize, 'red', enemySpeed, enemy1xMove,
+        var enemy1 = new Enemy(enemy1xPos, enemy1yPos, PIXEL_SIZE, PIXEL_SIZE, 'red', enemySpeed, enemy1xMove,
             enemy1yMove, displacement, enemyReversed);
-        var enemy2 = new Enemy(enemy2xPos, enemy2yPos, pixelSize, pixelSize, 'red', enemySpeed, enemy2xMove,
+        var enemy2 = new Enemy(enemy2xPos, enemy2yPos, PIXEL_SIZE, PIXEL_SIZE, 'red', enemySpeed, enemy2xMove,
             enemy2yMove, displacement, enemyReversed);
-        var enemy3 = new Enemy(enemy3xPos, enemy3yPos, pixelSize, pixelSize, 'red', enemySpeed, enemy3xMove,
+        var enemy3 = new Enemy(enemy3xPos, enemy3yPos, PIXEL_SIZE, PIXEL_SIZE, 'red', enemySpeed, enemy3xMove,
             enemy3yMove, displacement, enemyReversed);
-        var enemy4 = new Enemy(enemy4xPos, enemy4yPos, pixelSize, pixelSize, 'red', enemySpeed, enemy4xMove,
+        var enemy4 = new Enemy(enemy4xPos, enemy4yPos, PIXEL_SIZE, PIXEL_SIZE, 'red', enemySpeed, enemy4xMove,
             enemy4yMove, displacement, enemyReversed);
-        var enemy5 = new Enemy(enemy5xPos, enemy5yPos, pixelSize, pixelSize, 'red', enemySpeed, enemy5xMove,
+        var enemy5 = new Enemy(enemy5xPos, enemy5yPos, PIXEL_SIZE, PIXEL_SIZE, 'red', enemySpeed, enemy5xMove,
             enemy5yMove, displacement, enemyReversed);
-        var enemy6 = new Enemy(enemy6xPos, enemy6yPos, pixelSize, pixelSize, 'red', enemySpeed, enemy6xMove,
+        var enemy6 = new Enemy(enemy6xPos, enemy6yPos, PIXEL_SIZE, PIXEL_SIZE, 'red', enemySpeed, enemy6xMove,
             enemy6yMove, displacement, enemyReversed);
-        var enemy7 = new Enemy(enemy7xPos, enemy7yPos, pixelSize, pixelSize, 'red', enemySpeed, enemy7xMove,
+        var enemy7 = new Enemy(enemy7xPos, enemy7yPos, PIXEL_SIZE, PIXEL_SIZE, 'red', enemySpeed, enemy7xMove,
             enemy7yMove, displacement, enemyReversed);
-        var enemy8 = new Enemy(enemy8xPos, enemy8yPos, pixelSize, pixelSize, 'red', enemySpeed, enemy8xMove,
+        var enemy8 = new Enemy(enemy8xPos, enemy8yPos, PIXEL_SIZE, PIXEL_SIZE, 'red', enemySpeed, enemy8xMove,
             enemy8yMove, displacement, enemyReversed);
 
         window.onload = function () {
@@ -355,7 +355,7 @@
                     liveCount = 5;
                     roundStarting = false;
                 }
-                canvasContext.fillText("Lives: " + liveCount, 1002 - 3.5 * pixelSize, 52, 4.5 * pixelSize);
+                canvasContext.fillText("Lives: " + liveCount, 1002 - 3.5 * PIXEL_SIZE, 52, 4.5 * PIXEL_SIZE);
                 mazeDraw();
                 activePlayerLocation();
                 player.drawRect();
@@ -381,7 +381,7 @@
                     roundStarting = false;
                     console.log('round started');
                 }
-                canvasContext.fillText("Lives: " + liveCount, 1002 - 3.5 * pixelSize, 52, 4.5 * pixelSize);
+                canvasContext.fillText("Lives: " + liveCount, 1002 - 3.5 * PIXEL_SIZE, 52, 4.5 * PIXEL_SIZE);
                 mazeDraw();
                 activePlayerLocation();
                 player.drawRect();
@@ -410,7 +410,7 @@
                     liveCount = 1;
                     roundStarting = false;
                 }
-                canvasContext.fillText("Lives: " + liveCount, 1002 - 3.5 * pixelSize, 52, 4.5 * pixelSize);
+                canvasContext.fillText("Lives: " + liveCount, 1002 - 3.5 * PIXEL_SIZE, 52, 4.5 * PIXEL_SIZE);
                 mazeDraw();
                 activePlayerLocation();
                 player.drawRect();
@@ -558,7 +558,7 @@
             canvasContext.font = '30px serif';
             canvasContext.textAlign = 'center';
             if (timerStart) {
-                canvasContext.fillText(timeLeft, 1002 - 3.6 * pixelSize, 114, 6 * pixelSize - 4);
+                canvasContext.fillText(timeLeft, 1002 - 3.6 * PIXEL_SIZE, 114, 6 * PIXEL_SIZE - 4);
             }
         }
 
@@ -572,7 +572,7 @@
                 }
             }
             if (invincibility) {
-                canvasContext.fillText("Invincibility", 1002 - 3.5 * pixelSize, 85, 4.5 * pixelSize);
+                canvasContext.fillText("Invincibility", 1002 - 3.5 * PIXEL_SIZE, 85, 4.5 * PIXEL_SIZE);
                 if (timerStart == false) {
                     timer(10);
                     timerStart = true;
@@ -620,19 +620,19 @@
         function mazeDraw() {
             for (var i = 0; i < arrayMap.length; i++) {
                 // if (arrayMap[i] == 1) {
-                //     colorRect(((i - 50 * (Math.floor(i / 50 ))) * pixelSize), (Math.floor(i / 50)) * pixelSize, pixelSize, pixelSize, 'white');
+                //     colorRect(((i - 50 * (Math.floor(i / 50 ))) * PIXEL_SIZE), (Math.floor(i / 50)) * PIXEL_SIZE, PIXEL_SIZE, PIXEL_SIZE, 'white');
                 // } 
                 if (arrayMap[i] == 2) {
-                    drawImg(mazeWall, ((i - 50 * (Math.floor(i / 50))) * pixelSize), (Math.floor(i / 50)) * pixelSize,
-                        pixelSize, pixelSize);
+                    drawImg(mazeWall, ((i - 50 * (Math.floor(i / 50))) * PIXEL_SIZE), (Math.floor(i / 50)) * PIXEL_SIZE,
+                        PIXEL_SIZE, PIXEL_SIZE);
                 }
                 if (arrayMap[i] == 3 || arrayMap[i] == 4) {
-                    colorRect(((i - 50 * (Math.floor(i / 50))) * pixelSize), (Math.floor(i / 50)) * pixelSize,
-                        pixelSize, pixelSize, 'yellow');
+                    colorRect(((i - 50 * (Math.floor(i / 50))) * PIXEL_SIZE), (Math.floor(i / 50)) * PIXEL_SIZE,
+                        PIXEL_SIZE, PIXEL_SIZE, 'yellow');
                 }
                 if (arrayMap[i] == 7) {
-                    colorRect(((i - 50 * (Math.floor(i / 50))) * pixelSize), (Math.floor(i / 50)) * pixelSize,
-                        pixelSize, pixelSize, 'orange');
+                    colorRect(((i - 50 * (Math.floor(i / 50))) * PIXEL_SIZE), (Math.floor(i / 50)) * PIXEL_SIZE,
+                        PIXEL_SIZE, PIXEL_SIZE, 'orange');
                 }
             }
         }
