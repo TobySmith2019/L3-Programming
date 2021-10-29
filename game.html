@@ -2,11 +2,13 @@
 
     <head>
         <title>Bollo</title>
+        <!-- Links to external js files -->
         <script src="player.js"></script>
         <script src="enemy.js"></script>
     </head>
 
     <body>
+        <!-- Drawing Canvas -->
         <canvas id="gameCanvas" width="1000" height="500"></canvas>
     </body>
 
@@ -24,6 +26,7 @@
         // 7 = Power Up
         // 8 = Placeholder
 
+        // array map which draws the maze, each number corresponds to a different type of square as shown above
         var arrayMap = [
             2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
             2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
@@ -77,6 +80,20 @@
             2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
         ]
 
+        // array for top highscores to be stored in, sort variable is used to sort highscores from high to low
+        var highscores = [
+            [],
+            [],
+            [],
+            [],
+            [],
+            [],
+            [],
+            [],
+        ];
+        var sort = [];
+
+        // keycodes for the whole alphabet for entry of username. inputKey for showing the last pressed letter
         var alphabet = [
             ['A', 65],
             ['B', 66],
@@ -105,20 +122,38 @@
             ['Y', 89],
             ['Z', 90],
         ];
+        const BACKSPACE_KEY = 8;
+        var inputKey = "";
 
+        // fundamentals, live counter, set difficulty, score etc
         var liveCount = 5;
         var dead = false;
+        var difficulty = 'Easy';
+        var score = 10000;
+        var gameStarting = false;
+        var roundStarting = false;
+        var menuDisplay = true;
 
+        // variables concerned with username entry
         var user = 'Username';
         var undoUser = [];
         var userChange = false;
         var nameChange = false;
 
+        // player variables and stated pixel size for whole map
+        // steppedOn says which number is under the player on the array map
         const PIXEL_SIZE = 20;
         var pXpos = 0;
         var pYpos = 0;
-        var enemySpeed = 2;
+        var steppedOn = 3;
+        var playerLocation = 550;
 
+        // enemy variables for every different enemy which appears, all have the same speed but these code for different paths
+        // enemyReversed is used to dictate when enemies are moving forward or back on their path
+        // displacement to show how far enemies are from their original location, helps with path movement
+        var enemySpeed = 2;
+        var enemyReversed = false;
+        var displacement = 0;
         var enemy1xPos = 800;
         var enemy1yPos = 20;
         var enemy1xMove = 0;
@@ -159,70 +194,57 @@
         var enemy8xMove = 0;
         var enemy8yMove = 5;
 
+        // keycodes for arrow keys for player movement
         const W_KEY = 87;
         const A_KEY = 65;
         const S_KEY = 83;
         const D_KEY = 68;
-        const BACKSPACE_KEY = 8;
 
-        var mouseX = null;
-        var mouseY = null;
-        var mousePressed = null;
+        // establishes when each movement key has been pressed
         var wKeyPressed = false;
         var aKeyPressed = false;
         var sKeyPressed = false;
         var dKeyPressed = false;
         var backSpacePressed = false;
-        var inputKey = "";
 
+        // variables to make the player only move one square per press, aka can't hold down for fast movement
         var wOneClick = false;
         var aOneClick = false;
         var sOneClick = false;
         var dOneClick = false;
 
+        // variables for mouse coordinates and whether mouse has been pressed
+        var mouseX = null;
+        var mouseY = null;
+        var mousePressed = null;
+
+        // powerup variables including timer vars
         var invincibilityLocation = 550;
         var invincibility = false;
         var powerUpPlaced = false;
+        var timerStart = false;
+        var timeLeft = 0;
 
+        // establishes which difficulty was selected
         var easyClicked = false;
         var mediumClicked = false;
         var hardClicked = false;
 
+        // sources for images used
         var logo = new Image();
         logo.src = 'images/logo.png';
-
         var mazeWall = new Image();
         mazeWall.src = 'images/wall.png';
-
         var bg = new Image();
         bg.src = 'images/bg.png';
 
-        var highscores = [
-            [],
-            [],
-            [],
-            [],
-            [],
-            [],
-            [],
-            [],
-        ];
-        var sort = [];
-        var difficulty = 'Easy';
-        var score = 10000;
-        var timerStart = false;
-        var timeLeft = 0;
-        var lastKeyPressed = null;
+        // used to create dummy walls in front of player when stepped on certain square
         var dummyWallLocation = null;
-        var enemyReversed = false;
-        var displacement = 0;
-        var gameStarting = false;
-        var roundStarting = false;
-        var playerLocation = 550;
-        var steppedOn = 3;
-        var menuDisplay = true;
+
+        // class to insert the player using the external js file
         var player = new Player(pXpos, pYpos, PIXEL_SIZE, PIXEL_SIZE, 'lime');
-        var enemyCount = 4;
+
+        // dictates variables for enemies from their external js file
         var enemy1 = new Enemy(enemy1xPos, enemy1yPos, PIXEL_SIZE, PIXEL_SIZE, 'red', enemySpeed, enemy1xMove,
             enemy1yMove, displacement, enemyReversed);
         var enemy2 = new Enemy(enemy2xPos, enemy2yPos, PIXEL_SIZE, PIXEL_SIZE, 'red', enemySpeed, enemy2xMove,
@@ -240,41 +262,46 @@
         var enemy8 = new Enemy(enemy8xPos, enemy8yPos, PIXEL_SIZE, PIXEL_SIZE, 'red', enemySpeed, enemy8xMove,
             enemy8yMove, displacement, enemyReversed);
 
+        // sets up game canvas
         window.onload = function () {
             canvas = document.getElementById('gameCanvas');
             canvasContext = canvas.getContext('2d');
 
+            // detects key presses
             document.addEventListener('keydown', keyPressed);
             document.addEventListener('keyup', keyReleased);
 
+            // detects mouse presses and movements and changes variables accompanyingly
             canvas.addEventListener('mousedown', function (evt) {
                 mousePressed = true;
             });
-
             canvas.addEventListener('mouseup', function (evt) {
                 mousePressed = false;
             });
-
             canvas.addEventListener('mousemove', function (evt) {
                 var mousePos = mouseAction(evt);
                 x = mousePos.x;
                 y = mousePos.y;
             });
-
             var x, y;
 
+            // mainloop sets how many frames are run per second
             setInterval(mainloop, 1000 / 50);
-        }
+        } //window.onload function end
 
+        // main code which is run so many times per second
         function mainloop() {
+            // draws background image on canvas
             drawImg(bg, 0, 0, canvas.width, canvas.height);
-            // console.log(score);
-            // console.log(liveCount);
+
+            // variables which should be changed once as the game starts
             if (gameStarting) {
                 arrayMap[playerLocation] = 1;
                 liveCount = 5;
                 gameStarting = false;
             }
+
+            // functions which should only be run while on the menu screen
             if (menuDisplay) {
                 menuBg();
                 easyButton();
@@ -283,6 +310,8 @@
                 menuHitBoxes();
                 usernameEntry();
             }
+
+            // detects which difficulty is selected and starts the functions for that gamemode
             if (easyClicked) {
                 startGameEasy();
                 difficulty = 'Easy';
@@ -295,61 +324,72 @@
                 startGameHard();
                 difficulty = 'Hard';
             }
+
+            // detects if player runs out of lives and triggers the end of game function
             if (liveCount < 1) {
                 gameLose();
                 dead = true;
             }
-            player.win();
-        }
 
+            // runs win screen when player reaches end
+            player.win();
+        } // mainloop end
 
         function usernameEntry() {
-            colorRect(canvas.width / 2 - 100, 145, 200, 50, 'black');
-            colorRect(canvas.width / 2 - 95, 150, 190, 40, 'white');
+            // draws username entry box
+            colorRect(canvas.width / 2 - 100, canvas.height * 0.29, 200, 50, 'black');
+            colorRect(canvas.width / 2 - 95, canvas.height * 0.3, 190, 40, 'white');
             canvasContext.fillStyle = 'black';
             canvasContext.font = '30px serif';
             canvasContext.textAlign = 'center';
-            canvasContext.fillText(user, canvas.width / 2, 179, 200);
+            canvasContext.fillText(user, canvas.width / 2, canvas.height * 179 / 500, 200);
 
+            // adds a letter to end of user string
             if (userChange && nameChange && user.length < 9) {
                 undoUser[user.length] = user;
                 user = user + inputKey;
                 nameChange = false;
                 inputKey = "";
             }
+
+            // undoes last typed letter, effectively backspace
             if (backSpacePressed && user.length > 0) {
                 user = undoUser[user.length - 1];
                 backSpacePressed = false;
             }
-        }
+        } // usernameEntry end
 
+        // draws easy button
         function easyButton() {
-            colorRect(canvas.width / 2 - 100, 200, 200, 50, 'black');
-            colorRect(canvas.width / 2 - 95, 205, 190, 40, 'white');
+            colorRect(canvas.width / 2 - 100, canvas.height * 0.4, 200, 50, 'black');
+            colorRect(canvas.width / 2 - 95, canvas.height * 0.41, 190, 40, 'white');
             canvasContext.font = '30px serif';
             canvasContext.textAlign = 'center';
             canvasContext.fillStyle = 'black';
-            canvasContext.fillText('Easy', canvas.width / 2, 233);
-        }
+            canvasContext.fillText('Easy', canvas.width / 2, canvas.height * 0.466);
+        } // easy button function end
 
+        // draws medium button
         function mediumButton() {
-            colorRect(canvas.width / 2 - 100, 255, 200, 50, 'black');
-            colorRect(canvas.width / 2 - 95, 260, 190, 40, 'white');
+            colorRect(canvas.width / 2 - 100, canvas.height * 0.51, 200, 50, 'black');
+            colorRect(canvas.width / 2 - 95, canvas.height * 0.52, 190, 40, 'white');
             canvasContext.font = '30px serif';
             canvasContext.textAlign = 'center';
             canvasContext.fillStyle = 'black';
-            canvasContext.fillText('Medium', canvas.width / 2, 288);
-        }
+            canvasContext.fillText('Medium', canvas.width / 2, canvas.height * 0.576);
+        } // medium button function end
 
+        // draws hard button
         function hardButton() {
-            colorRect(canvas.width / 2 - 100, 310, 200, 50, 'black');
-            colorRect(canvas.width / 2 - 95, 315, 190, 40, 'white');
+            colorRect(canvas.width / 2 - 100, canvas.height * 0.62, 200, 50, 'black');
+            colorRect(canvas.width / 2 - 95, canvas.height * 0.63, 190, 40, 'white');
             canvasContext.font = '30px serif';
             canvasContext.textAlign = 'center';
             canvasContext.fillStyle = 'black';
-            canvasContext.fillText('Hard', canvas.width / 2, 343);
-        }
+            canvasContext.fillText('Hard', canvas.width / 2, canvas.height * 0.686);
+        } // hard button function end
 
+        // animates menu screen background and draws game title and semitransparent background
         function menuBg() {
             mazeDraw();
             enemy1.drawRect();
@@ -360,23 +400,29 @@
             enemy3.move();
             enemy4.drawRect();
             enemy4.move();
-            colorRect(canvas.width / 2 - 200, 0, 400, canvas.height, 'rgba(105, 105, 105, 0.8');
-            drawImg(logo, canvas.width / 2 - 75, 50, 150, 80);
-        }
+            colorRect(canvas.width / 2 - 200, 0, canvas.width * 0.4, canvas.height, 'rgba(105, 105, 105, 0.8');
+            drawImg(logo, canvas.width / 2 - 75, canvas.height * 0.1, 150, 80);
+        } // menu background function end
 
+        // sets gamemode to easy and starts game
         function startGameEasy() {
+            // makes game play until out of lives
             if (dead == false) {
+                // variable changes to be run once
                 if (roundStarting) {
                     liveCount = 5;
                     roundStarting = false;
                 }
+                // draws text for life counter and changing score
                 canvasContext.fillStyle = 'blue';
-                canvasContext.fillText("Lives: " + liveCount, 1002 - 3.5 * PIXEL_SIZE, 52, 4.5 * PIXEL_SIZE);
+                canvasContext.fillText("Lives: " + liveCount, canvas.width - 3.5 * PIXEL_SIZE, canvas.height * 0.104, 4.5 * PIXEL_SIZE);
                 if (invincibility == false) {
-                    canvasContext.fillText("Score:", 1002 - 3.5 * PIXEL_SIZE, 3 * PIXEL_SIZE + 20, 4.5 * PIXEL_SIZE);
-                    canvasContext.fillText(Math.floor(score), 1002 - 3.5 * PIXEL_SIZE, 4 * PIXEL_SIZE + 35, 4.5 *
+                    canvasContext.fillText("Score:", canvas.width - 3.5 * PIXEL_SIZE, 4 * PIXEL_SIZE, 4.5 * PIXEL_SIZE);
+                    canvasContext.fillText(Math.floor(score), canvas.width - 3.5 * PIXEL_SIZE, 5.75 * PIXEL_SIZE, 4.5 *
                         PIXEL_SIZE);
                 }
+
+                // runs functions to draw maze, track player, allow player and enemies to move and reduces score
                 mazeDraw();
                 activePlayerLocation();
                 player.drawRect();
@@ -394,22 +440,29 @@
                 timerDisplay();
                 score -= 0.1;
             }
-        }
+        } // start game easy function end
 
+        // sets gamemode to medium and starts game
         function startGameMedium() {
+            // makes game play until out of lives
             if (dead == false) {
+                // variable changes to be run once
                 if (roundStarting) {
                     liveCount = 3;
                     roundStarting = false;
                 }
+
+                // draws text for life counter and changing score
                 canvasContext.fillStyle = 'yellow';
-                canvasContext.fillText("Lives: " + liveCount, 1002 - 3.5 * PIXEL_SIZE, 2 * PIXEL_SIZE + 5, 4.5 *
+                canvasContext.fillText("Lives: " + liveCount, canvas.width - 3.5 * PIXEL_SIZE, 2.25 * PIXEL_SIZE, 4.5 *
                     PIXEL_SIZE);
                 if (invincibility == false) {
-                    canvasContext.fillText("Score:", 1002 - 3.5 * PIXEL_SIZE, 3 * PIXEL_SIZE + 20, 4.5 * PIXEL_SIZE);
-                    canvasContext.fillText(Math.floor(score), 1002 - 3.5 * PIXEL_SIZE, 4 * PIXEL_SIZE + 35, 4.5 *
+                    canvasContext.fillText("Score:", canvas.width - 3.5 * PIXEL_SIZE, 4 * PIXEL_SIZE, 4.5 * PIXEL_SIZE);
+                    canvasContext.fillText(Math.floor(score), canvas.width - 3.5 * PIXEL_SIZE, 5.75 * PIXEL_SIZE, 4.5 *
                         PIXEL_SIZE);
                 }
+
+                // runs functions to draw maze, track player, allow player and enemies to move and reduces score
                 mazeDraw();
                 activePlayerLocation();
                 player.drawRect();
@@ -431,21 +484,28 @@
                 timerDisplay();
                 score -= 0.1;
             }
-        }
+        } // start game medium function end
 
+        // sets gamemode to hard and starts game
         function startGameHard() {
+            // makes game play until out of lives
             if (dead == false) {
+                // variable changes to be run once
                 if (roundStarting) {
                     liveCount = 1;
                     roundStarting = false;
                 }
+
+                // draws text for life counter and changing score
                 canvasContext.fillStyle = 'red';
-                canvasContext.fillText("Lives: " + liveCount, 1002 - 3.5 * PIXEL_SIZE, 52, 4.5 * PIXEL_SIZE);
+                canvasContext.fillText("Lives: " + liveCount, canvas.width - 3.5 * PIXEL_SIZE, 0.104 * canvas.height, 4.5 * PIXEL_SIZE);
                 if (invincibility == false) {
-                    canvasContext.fillText("Score:", 1002 - 3.5 * PIXEL_SIZE, 3 * PIXEL_SIZE + 20, 4.5 * PIXEL_SIZE);
-                    canvasContext.fillText(Math.floor(score), 1002 - 3.5 * PIXEL_SIZE, 4 * PIXEL_SIZE + 35, 4.5 *
+                    canvasContext.fillText("Score:", canvas.width - 3.5 * PIXEL_SIZE, 4 * PIXEL_SIZE, 4.5 * PIXEL_SIZE);
+                    canvasContext.fillText(Math.floor(score), canvas.width - 3.5 * PIXEL_SIZE, 5.75 * PIXEL_SIZE, 4.5 *
                         PIXEL_SIZE);
                 }
+
+                // runs functions to draw maze, track player, allow player and enemies to move and reduces score
                 mazeDraw();
                 activePlayerLocation();
                 player.drawRect();
@@ -473,25 +533,13 @@
                 timerDisplay();
                 score -= 0.1;
             }
-        }
+        } // start game hard function end
 
-        function mouseAction(evt) {
-            var rect = canvas.getBoundingClientRect();
-            var root = document.documentElement;
-            x = evt.clientX - rect.left - root.scrollLeft;
-            y = evt.clientY - rect.top - root.scrollTop;
-
-            mouseX = x;
-            mouseY = y;
-
-            return {
-                x: x,
-                y: y
-            }
-        }
-
+        // detects if player clicks in the region of the on screen buttons
         function menuHitBoxes() {
+            // only allows hit boxes while buttons are active
             if (menuDisplay) {
+                // determining hitbox for username entry and what to do when clicked
                 if (mouseX > canvas.width / 2 - 100 && mouseX < canvas.width / 2 + 100 && 145 < mouseY && mouseY <
                     195 && mousePressed && userChange == false) {
                     user = "";
@@ -499,35 +547,182 @@
                     userError = false;
                 }
 
+                // determines hitbox for easy button and changes variables in order to start that gamemode
                 if (mouseX > canvas.width / 2 - 100 && mouseX < canvas.width / 2 + 100 && 200 < mouseY && mouseY <
                     250 && mousePressed && user.length > 0) {
+                    // enemy variables are reset to reset their animation on the background of the menu
                     setEnemyVars();
                     menuDisplay = false;
                     easyClicked = true;
                     roundStarting = true;
                 }
+
+                // determines hitbox for medium button and changes variables in order to start that gamemode
                 if (mouseX > canvas.width / 2 - 100 && mouseX < canvas.width / 2 + 100 && 255 < mouseY && mouseY <
                     305 && mousePressed && user.length > 0) {
+                    // enemy variables are reset to reset their animation on the background of the menu
                     setEnemyVars();
                     menuDisplay = false;
                     mediumClicked = true;
                     roundStarting = true;
                 }
+
+                // determines hitbox for hard button and changes variables in order to start that gamemode
                 if (mouseX > canvas.width / 2 - 100 && mouseX < canvas.width / 2 + 100 && 310 < mouseY && mouseY <
                     360 && mousePressed && user.length > 0) {
+                    // enemy variables are reset to reset their animation on the background of the menu
                     setEnemyVars();
                     menuDisplay = false;
                     hardClicked = true;
                     roundStarting = true;
                 }
             }
-        }
+        } // menu hit boxes function end
 
-        function colorRect(x, y, w, h, c, z) {
-            canvasContext.fillStyle = c;
-            canvasContext.fillRect(x, y, w, h);
-        }
+        // tracks where the player is in the array map
+        function activePlayerLocation() {
+            arrayMap[playerLocation] = 1;
+        } // player location function end
 
+        // starts a timer in the corner of the screen for when the powerup is active
+        function timerDisplay() {
+            canvasContext.font = '30px serif';
+            canvasContext.textAlign = 'center';
+            if (timerStart) {
+                canvasContext.fillText(timeLeft, canvas.width - 3.6 * PIXEL_SIZE, canvas.height * 0.228, 5.8 * PIXEL_SIZE);
+            }
+        } // timer display function end
+
+        // triggers powerup
+        function powerUps() {
+            // picks random place on the map to place, but ensures it is on the track not the wall
+            if (arrayMap[invincibilityLocation] != 0 && powerUpPlaced == false) {
+                invincibilityLocation = Math.floor(Math.random() * 1249);
+
+                if (arrayMap[invincibilityLocation] == 0) {
+                    arrayMap[invincibilityLocation] = 7;
+                    powerUpPlaced = true;
+                }
+            }
+
+            // displays name and timer when powerup active
+            if (invincibility) {
+                canvasContext.fillText("Invincibility", canvas.width - 3.5 * PIXEL_SIZE, canvas.height * 0.17, 4.5 * PIXEL_SIZE);
+                if (timerStart == false) {
+                    timer(10);
+                    timerStart = true;
+                }
+            }
+        } // powerup function end
+
+        // sets up dummy wall to not let player through
+        function trapWall() {
+            // detects if trigger is stepped on
+            if (arrayMap[playerLocation] == 5) {
+                // detects which direction the player has come from to determine where the wall should appear
+                if (arrayMap[playerLocation + 50] == 6) {
+                    arrayMap[playerLocation + 50] = 2;
+                    dummyWallLocation = playerLocation + 50;
+                }
+                if (arrayMap[playerLocation - 50] == 6) {
+                    arrayMap[playerLocation - 50] = 2;
+                    dummyWallLocation = playerLocation - 50;
+                }
+                if (arrayMap[playerLocation + 1] == 6) {
+                    arrayMap[playerLocation + 1] = 2;
+                    dummyWallLocation = playerLocation + 1;
+                }
+                if (arrayMap[playerLocation - 1] == 6) {
+                    arrayMap[playerLocation - 1] = 2;
+                    dummyWallLocation = playerLocation - 1;
+                }
+            }
+
+            // stops the trap being triggered if trigger not stepped on
+            if (steppedOn != 5) {
+                arrayMap[dummyWallLocation] = 6;
+            }
+        } // trapwall function end
+
+        // draws maze according to which number present where in the array map
+        function mazeDraw() {
+            for (var i = 0; i < arrayMap.length; i++) {
+                // draws wall squares
+                if (arrayMap[i] == 2) {
+                    drawImg(mazeWall, ((i - 50 * (Math.floor(i / 50))) * PIXEL_SIZE), (Math.floor(i / 50)) * PIXEL_SIZE,
+                        PIXEL_SIZE, PIXEL_SIZE);
+                }
+                // draws yellow squares for start and end pos
+                if (arrayMap[i] == 3 || arrayMap[i] == 4) {
+                    colorRect(((i - 50 * (Math.floor(i / 50))) * PIXEL_SIZE), (Math.floor(i / 50)) * PIXEL_SIZE,
+                        PIXEL_SIZE, PIXEL_SIZE, 'yellow');
+                }
+                // square where powerup will appear
+                if (arrayMap[i] == 7) {
+                    colorRect(((i - 50 * (Math.floor(i / 50))) * PIXEL_SIZE), (Math.floor(i / 50)) * PIXEL_SIZE,
+                        PIXEL_SIZE, PIXEL_SIZE, 'orange');
+                }
+            }
+        } // maze draw function end
+
+        // draws high score table on win screen
+        function scoreTable() {
+            canvasContext.fillText("Highscores:", canvas.width / 2, canvas.height * 3 /
+                7, canvas.width);
+            // retrieves highscores from local storage, only as many as are present
+            for (var i = 0; i < localStorage.length / 3; i++) {
+                highscores[i][0] = localStorage.getItem("user" + i);
+                highscores[i][1] = localStorage.getItem("score" + i);
+                highscores[i][2] = localStorage.getItem("difficulty" + i);
+            }
+            canvasContext.font = '15px serif';
+            // draws table and dictates where it should be
+            for (var i = 0; i < localStorage.length / 3; i++) {
+                for (var p = 0; p < 2; p++) {
+                    if (p == 0) {
+                        canvasContext.fillText(highscores[i][p], canvas.width / 2 - 30 + 60 * p, canvas.height *
+                            3 / 7 + 20 * (i + 2), canvas.width / 4);
+                    }
+                    if (p == 1) {
+                        canvasContext.fillText(Math.floor(highscores[i][p]), canvas.width / 2 - 30 + 60 * p, canvas
+                            .height *
+                            3 / 7 + 20 * (i + 2), canvas.width / 4);
+                    }
+                }
+            }
+        } // score table function end
+
+        // function to run if run out of lives
+        function gameLose() {
+            // stops all games from running
+            easyClicked = false;
+            mediumClicked = false;
+            hardClicked = false;
+            // displays game over screen
+            if (dead) {
+                canvasContext.fillStyle = 'black';
+                canvasContext.font = '50px serif';
+                canvasContext.textAlign = 'center';
+                canvasContext.fillText("Game Over", canvas.width / 2, canvas.height / 4, canvas.width / 4);
+                canvasContext.fillText("You Lose :(", canvas.width / 2, canvas.height / 2, canvas.width / 4);
+                colorRect(canvas.width / 2 - 100, canvas.height * 5 / 8, 200, 50, 'black');
+                colorRect(canvas.width / 2 - 95, canvas.height * 5 / 8 + 5, 190, 40, 'white');
+                // codes for back to menu button
+                canvasContext.font = '30px serif';
+                canvasContext.textAlign = 'center';
+                canvasContext.fillStyle = 'black';
+                canvasContext.fillText('Back To Menu', canvas.width / 2, canvas.height * 5 / 8 + 33);
+                // hitbox for back to menu button
+                if (mouseX > canvas.width / 2 - 100 && mouseX < canvas.width / 2 + 100 && canvas.height * 5 / 8 <
+                    mouseY && mouseY <
+                    canvas.height * 5 / 8 + 50 && mousePressed && user.length > 0) {
+                    // triggers the web page to reload as a way of restarting the game
+                    location.reload();
+                }
+            }
+        } // game lose function end
+
+        // resets enemy variables to original
         function setEnemyVars() {
             enemy1.x = 800;
             enemy1.y = 20;
@@ -584,147 +779,9 @@
             enemy8.yMove = 5;
             enemy8.d = 0;
             enemy8.ed = false;
-        }
+        } // set enemy vars function end
 
-        function activePlayerLocation() {
-            arrayMap[playerLocation] = 1;
-        }
-
-        function timerDisplay() {
-            canvasContext.font = '30px serif';
-            canvasContext.textAlign = 'center';
-            if (timerStart) {
-                canvasContext.fillText(timeLeft, 1002 - 3.6 * PIXEL_SIZE, 114, 6 * PIXEL_SIZE - 4);
-            }
-        }
-
-        function powerUps() {
-            if (arrayMap[invincibilityLocation] != 0 && powerUpPlaced == false) {
-                invincibilityLocation = Math.floor(Math.random() * 1249);
-
-                if (arrayMap[invincibilityLocation] == 0) {
-                    arrayMap[invincibilityLocation] = 7;
-                    powerUpPlaced = true;
-                }
-            }
-            if (invincibility) {
-                canvasContext.fillText("Invincibility", 1002 - 3.5 * PIXEL_SIZE, 85, 4.5 * PIXEL_SIZE);
-                if (timerStart == false) {
-                    timer(10);
-                    timerStart = true;
-                }
-            }
-        }
-
-        function timer(num) {
-            timeLeft = num;
-            setInterval(function () {
-                if (timeLeft >= 1) {
-                    timeLeft -= 1;
-                }
-                if (timeLeft < 1) {
-                    timerStart = false;
-                }
-            }, 1000);
-        }
-
-        function trapWall() {
-            if (arrayMap[playerLocation] == 5) {
-                if (arrayMap[playerLocation + 50] == 6) {
-                    arrayMap[playerLocation + 50] = 2;
-                    dummyWallLocation = playerLocation + 50;
-                }
-                if (arrayMap[playerLocation - 50] == 6) {
-                    arrayMap[playerLocation - 50] = 2;
-                    dummyWallLocation = playerLocation - 50;
-                }
-                if (arrayMap[playerLocation + 1] == 6) {
-                    arrayMap[playerLocation + 1] = 2;
-                    dummyWallLocation = playerLocation + 1;
-                }
-                if (arrayMap[playerLocation - 1] == 6) {
-                    arrayMap[playerLocation - 1] = 2;
-                    dummyWallLocation = playerLocation - 1;
-                }
-            }
-
-            if (steppedOn != 5) {
-                arrayMap[dummyWallLocation] = 6;
-            }
-        }
-
-        function mazeDraw() {
-            for (var i = 0; i < arrayMap.length; i++) {
-                // if (arrayMap[i] == 1) {
-                //     colorRect(((i - 50 * (Math.floor(i / 50 ))) * PIXEL_SIZE), (Math.floor(i / 50)) * PIXEL_SIZE, PIXEL_SIZE, PIXEL_SIZE, 'white');
-                // } 
-                if (arrayMap[i] == 2) {
-                    drawImg(mazeWall, ((i - 50 * (Math.floor(i / 50))) * PIXEL_SIZE), (Math.floor(i / 50)) * PIXEL_SIZE,
-                        PIXEL_SIZE, PIXEL_SIZE);
-                }
-                if (arrayMap[i] == 3 || arrayMap[i] == 4) {
-                    colorRect(((i - 50 * (Math.floor(i / 50))) * PIXEL_SIZE), (Math.floor(i / 50)) * PIXEL_SIZE,
-                        PIXEL_SIZE, PIXEL_SIZE, 'yellow');
-                }
-                if (arrayMap[i] == 7) {
-                    colorRect(((i - 50 * (Math.floor(i / 50))) * PIXEL_SIZE), (Math.floor(i / 50)) * PIXEL_SIZE,
-                        PIXEL_SIZE, PIXEL_SIZE, 'orange');
-                }
-            }
-        }
-
-        function drawImg(src, x, y, w, h) {
-            canvasContext.drawImage(src, x, y, w, h);
-        }
-
-        function scoreTable() {
-            canvasContext.fillText("Highscores For " + difficulty + " Game Mode:", canvas.width / 2, canvas.height * 3 /
-                7, canvas.width);
-            for (var i = 0; i < localStorage.length / 3; i++) {
-                highscores[i][0] = localStorage.getItem("user" + i);
-                highscores[i][1] = localStorage.getItem("score" + i);
-                highscores[i][2] = localStorage.getItem("difficulty" + i);
-            }
-            canvasContext.font = '15px serif';
-            for (var i = 0; i < localStorage.length / 3; i++) {
-                for (var p = 0; p < 2; p++) {
-                    if (p == 0) {
-                        canvasContext.fillText(highscores[i][p], canvas.width / 2 - 30 + 60 * p, canvas.height *
-                            3 / 7 + 20 * (i + 2), canvas.width / 4);
-                    }
-                    if (p == 1) {
-                        canvasContext.fillText(Math.floor(highscores[i][p]), canvas.width / 2 - 30 + 60 * p, canvas
-                            .height *
-                            3 / 7 + 20 * (i + 2), canvas.width / 4);
-                    }
-                }
-            }
-        }
-
-        function gameLose() {
-            easyClicked = false;
-            mediumClicked = false;
-            hardClicked = false;
-            if (dead) {
-                canvasContext.fillStyle = 'black';
-                canvasContext.font = '50px serif';
-                canvasContext.textAlign = 'center';
-                canvasContext.fillText("Game Over", canvas.width / 2, canvas.height / 4, canvas.width / 4);
-                canvasContext.fillText("You Lose :(", canvas.width / 2, canvas.height / 2, canvas.width / 4);
-                colorRect(canvas.width / 2 - 100, canvas.height * 5 / 8, 200, 50, 'black');
-                colorRect(canvas.width / 2 - 95, canvas.height * 5 / 8 + 5, 190, 40, 'white');
-                canvasContext.font = '30px serif';
-                canvasContext.textAlign = 'center';
-                canvasContext.fillStyle = 'black';
-                canvasContext.fillText('Back To Menu', canvas.width / 2, canvas.height * 5 / 8 + 33);
-                if (mouseX > canvas.width / 2 - 100 && mouseX < canvas.width / 2 + 100 && canvas.height * 5 / 8 <
-                    mouseY && mouseY <
-                    canvas.height * 5 / 8 + 50 && mousePressed && user.length > 0) {
-                    location.reload();
-                }
-            }
-        }
-
+        // detects which keys have been pressed and changes their corresponding vars
         function keyPressed(evt) {
             if (evt.keyCode == W_KEY && wOneClick == false) {
                 wKeyPressed = true;
@@ -742,6 +799,8 @@
                 dKeyPressed = true;
                 dOneClick = true;
             }
+
+            // codes for the whole alphabet for username entry
             for (var i = 0; i < 26; i++) {
                 if (evt.keyCode == alphabet[i][1] && inputKey != alphabet[i][0]) {
                     inputKey = alphabet[i][0];
@@ -751,8 +810,9 @@
             if (evt.keyCode == BACKSPACE_KEY && backSpacePressed == false) {
                 backSpacePressed = true;
             }
-        }
+        } // key pressed function end
 
+        // detects when keys are released
         function keyReleased(evt) {
             if (evt.keyCode == W_KEY) {
                 wOneClick = false;
@@ -766,5 +826,45 @@
             if (evt.keyCode == D_KEY) {
                 dOneClick = false;
             }
-        }
+        } // key released function end
+
+        // actively tracks mouse location and stores it in variables
+        function mouseAction(evt) {
+            var rect = canvas.getBoundingClientRect();
+            var root = document.documentElement;
+            x = evt.clientX - rect.left - root.scrollLeft;
+            y = evt.clientY - rect.top - root.scrollTop;
+
+            mouseX = x;
+            mouseY = y;
+
+            return {
+                x: x,
+                y: y
+            }
+        } // mouse action function end
+
+        // sets up timer to run once per second
+        function timer(num) {
+            timeLeft = num;
+            setInterval(function () {
+                if (timeLeft >= 1) {
+                    timeLeft -= 1;
+                }
+                if (timeLeft < 1) {
+                    timerStart = false;
+                }
+            }, 1000);
+        } // timer function end
+
+        // standard function for setting up drawing of rectangles 
+        function colorRect(x, y, w, h, c, z) {
+            canvasContext.fillStyle = c;
+            canvasContext.fillRect(x, y, w, h);
+        } // color rect function end
+
+        // sets up for inserting images on canvas
+        function drawImg(src, x, y, w, h) {
+            canvasContext.drawImage(src, x, y, w, h);
+        } // draw image function end
     </script>
