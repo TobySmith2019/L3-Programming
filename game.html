@@ -402,6 +402,11 @@
             enemy4.move();
             colorRect(canvas.width / 2 - 200, 0, canvas.width * 0.4, canvas.height, 'rgba(105, 105, 105, 0.8');
             drawImg(logo, canvas.width / 2 - 75, canvas.height * 0.1, 150, 80);
+            canvasContext.fillStyle = 'white';
+            canvasContext.font = '15px serif';
+            canvasContext.fillText('Use WASD Keys To Navigate Your Way Through The Maze', canvas.width / 2, canvas
+                .height * 0.9, 0.37 * canvas.width);
+            canvasContext.fillText('Avoid The Enemies!', canvas.width / 2, canvas.height * 0.95, 0.37 * canvas.width);
         } // menu background function end
 
         // sets gamemode to easy and starts game
@@ -415,7 +420,8 @@
                 }
                 // draws text for life counter and changing score
                 canvasContext.fillStyle = 'blue';
-                canvasContext.fillText("Lives: " + liveCount, canvas.width - 3.5 * PIXEL_SIZE, canvas.height * 0.104, 4.5 * PIXEL_SIZE);
+                canvasContext.fillText("Lives: " + liveCount, canvas.width - 3.5 * PIXEL_SIZE, canvas.height * 0.104,
+                    4.5 * PIXEL_SIZE);
                 if (invincibility == false) {
                     canvasContext.fillText("Score:", canvas.width - 3.5 * PIXEL_SIZE, 4 * PIXEL_SIZE, 4.5 * PIXEL_SIZE);
                     canvasContext.fillText(Math.floor(score), canvas.width - 3.5 * PIXEL_SIZE, 5.75 * PIXEL_SIZE, 4.5 *
@@ -498,7 +504,8 @@
 
                 // draws text for life counter and changing score
                 canvasContext.fillStyle = 'red';
-                canvasContext.fillText("Lives: " + liveCount, canvas.width - 3.5 * PIXEL_SIZE, 0.104 * canvas.height, 4.5 * PIXEL_SIZE);
+                canvasContext.fillText("Lives: " + liveCount, canvas.width - 3.5 * PIXEL_SIZE, 0.104 * canvas.height,
+                    4.5 * PIXEL_SIZE);
                 if (invincibility == false) {
                     canvasContext.fillText("Score:", canvas.width - 3.5 * PIXEL_SIZE, 4 * PIXEL_SIZE, 4.5 * PIXEL_SIZE);
                     canvasContext.fillText(Math.floor(score), canvas.width - 3.5 * PIXEL_SIZE, 5.75 * PIXEL_SIZE, 4.5 *
@@ -589,7 +596,8 @@
             canvasContext.font = '30px serif';
             canvasContext.textAlign = 'center';
             if (timerStart) {
-                canvasContext.fillText(timeLeft, canvas.width - 3.6 * PIXEL_SIZE, canvas.height * 0.228, 5.8 * PIXEL_SIZE);
+                canvasContext.fillText(timeLeft, canvas.width - 3.6 * PIXEL_SIZE, canvas.height * 0.228, 5.8 *
+                    PIXEL_SIZE);
             }
         } // timer display function end
 
@@ -607,7 +615,8 @@
 
             // displays name and timer when powerup active
             if (invincibility) {
-                canvasContext.fillText("Invincibility", canvas.width - 3.5 * PIXEL_SIZE, canvas.height * 0.17, 4.5 * PIXEL_SIZE);
+                canvasContext.fillText("Invincibility", canvas.width - 3.5 * PIXEL_SIZE, canvas.height * 0.17, 4.5 *
+                    PIXEL_SIZE);
                 if (timerStart == false) {
                     timer(10);
                     timerStart = true;

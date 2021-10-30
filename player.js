@@ -105,6 +105,7 @@ class Player {
   win() {
     // when player reaches end
     if (steppedOn == 4) {
+      scoreTable();
       if (easyClicked || mediumClicked || hardClicked) {
         // makes the score only be saved once
         var scoreSaved = false;
@@ -163,7 +164,6 @@ class Player {
         location.reload();
       }
       // draws highscore table
-      scoreTable();
     }
   } // win function end
 
