@@ -50,7 +50,7 @@
             0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2,
             2, 0, 2, 0, 2, 0, 2, 2, 2, 0, 2, 0, 2, 2, 2, 2, 0, 2, 0, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2,
             2, 0, 2, 0, 2, 0, 2, 0, 2, 2, 2, 2, 2, 2, 2,
-            3, 0, 2, 0, 2, 0, 0, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 2, 0, 0, 2, 0, 2, 0, 2, 0, 2, 2, 0, 0, 0, 0, 2, 0, 2,
+            3, 4, 2, 0, 2, 0, 0, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 2, 0, 0, 2, 0, 2, 0, 2, 0, 2, 2, 0, 0, 0, 0, 2, 0, 2,
             0, 0, 2, 0, 2, 0, 2, 0, 2, 0, 0, 0, 0, 0, 4,
             2, 0, 2, 2, 2, 2, 2, 0, 2, 0, 2, 2, 2, 0, 2, 0, 2, 2, 2, 0, 2, 0, 0, 0, 0, 0, 0, 2, 0, 2, 2, 0, 2, 0, 2,
             0, 2, 2, 0, 2, 0, 2, 0, 2, 0, 2, 2, 2, 2, 2,
@@ -417,6 +417,10 @@
                 if (roundStarting) {
                     liveCount = 5;
                     roundStarting = false;
+                    wKeyPressed = false;
+                    aKeyPressed = false;
+                    sKeyPressed = false;
+                    dKeyPressed = false;
                 }
                 // draws text for life counter and changing score
                 canvasContext.fillStyle = 'blue';
@@ -456,6 +460,10 @@
                 if (roundStarting) {
                     liveCount = 3;
                     roundStarting = false;
+                    wKeyPressed = false;
+                    aKeyPressed = false;
+                    sKeyPressed = false;
+                    dKeyPressed = false;
                 }
 
                 // draws text for life counter and changing score
@@ -500,6 +508,10 @@
                 if (roundStarting) {
                     liveCount = 1;
                     roundStarting = false;
+                    wKeyPressed = false;
+                    aKeyPressed = false;
+                    sKeyPressed = false;
+                    dKeyPressed = false;
                 }
 
                 // draws text for life counter and changing score
@@ -684,6 +696,7 @@
                 highscores[i][1] = localStorage.getItem("score" + i);
                 highscores[i][2] = localStorage.getItem("difficulty" + i);
             }
+            player.sort();
             canvasContext.font = '15px serif';
             // draws table and dictates where it should be
             for (var i = 0; i < localStorage.length / 3; i++) {

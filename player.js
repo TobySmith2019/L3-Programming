@@ -105,10 +105,15 @@ class Player {
   win() {
     // when player reaches end
     if (steppedOn == 4) {
-      scoreTable();
       if (easyClicked || mediumClicked || hardClicked) {
-        // makes the score only be saved once
         var scoreSaved = false;
+        // makes the score only be saved once
+        // ends game movement
+        easyClicked = false;
+        mediumClicked = false;
+        hardClicked = false;
+      }
+      if (scoreSaved == false) {
         // retrieves scores from local memory
         if (localStorage.length > 0 && localStorage.length < 21) {
           for (var i = 0; i < localStorage.length / 3; i++) {
@@ -117,34 +122,38 @@ class Player {
             highscores[i][2] = localStorage.getItem("difficulty" + i);
           }
           // if high score board is not full it fills up the next available slot
-          for (var i = 0; i < localStorage.length / 3 + 1; i++) {
-            if (highscores[i].length == 0 && scoreSaved == false) {
-              localStorage.setItem("user" + i, user);
-              localStorage.setItem("score" + i, score);
-              localStorage.setItem("difficulty" + i, difficulty);
-              scoreSaved = true;
+          if (highscores[6].length == 0) {
+            for (var i = 0; i < localStorage.length / 3 + 1; i++) {
+              if (highscores[i].length == 0 && scoreSaved == false) {
+                localStorage.setItem("user" + i, user);
+                localStorage.setItem("score" + i, score);
+                localStorage.setItem("difficulty" + i, difficulty);
+                scoreSaved = true;
+              }
             }
           }
           // sorts scores biggest to smallest
           this.sort()
-        } else if (localStorage.length == 0) {
+        }
+        if (localStorage.length == 0) {
           // if no high scores, stores score to memory
           localStorage.setItem("user0", user);
           localStorage.setItem("score0", score);
           localStorage.setItem("difficulty0", difficulty);
-          scoreSaved = true;
-        } else if (score > highscores[6][1]) {
-          // replaces value at bottom of scoreboard if greater than it and then resorts
-          localStorage.setItem("user6", user);
-          localStorage.setItem("score6", score);
-          localStorage.setItem("difficulty6", difficulty);
-          this.sort();
         }
-        // ends game movement
-        easyClicked = false;
-        mediumClicked = false;
-        hardClicked = false;
+        if (score > highscores[6][1]) {
+          // replaces value at bottom of scoreboard if greater than it and then resorts
+          alert('yes');
+          highscores[6][0] = user;
+          highscores[6][1] = score;
+          highscores[6][2] = difficulty;
+          localStorage.setItem("user6", highscores[6][0]);
+          localStorage.setItem("score6", highscores[6][1]);
+          localStorage.setItem("difficulty6", highscores[6][2]);
+        }
+        scoreSaved = true;
       }
+      scoreTable();
       // draws win message and displays score
       canvasContext.fillStyle = 'black';
       canvasContext.font = '50px serif';
